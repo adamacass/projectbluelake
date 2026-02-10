@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %> | GhostDrop Admin</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="stylesheet" href="/css/custom.css">
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="/ghost-admin/dashboard" class="nav-logo" style="color:#ff8c00">ghost<span style="color:#ff8c00">admin</span></a>
+      <div class="nav-links">
+        <a href="/">site</a>
+        <a href="/ghost-admin/export/subscribers">export csv</a>
+        <a href="/ghost-admin/logout" style="color:var(--red)">logout</a>
+      </div>
+    </div>
+  </nav>
+
+  <main><%- body %></main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <span class="footer-text">ghost<span style="color:#ff8c00">admin</span> &mdash; internal only</span>
+    </div>
+  </footer>
+</body>
+</html>

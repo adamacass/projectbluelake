@@ -1,6 +1,6 @@
 const express = require('express');
 const { pool } = require('../db');
-const { requireAuth, getPlanLimits } = require('../middleware/auth');
+const { requireAuth } = require('../middleware/auth');
 
 const router = express.Router();
 
@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
 
     // Get user's drops
     const drops = await pool.query(
-      `SELECT id, label, has_password, max_views, current_views, is_destroyed, expires_at, notify, created_at
+      `SELECT id, label, codename, has_password, max_views, current_views, is_destroyed, expires_at, notify, created_at
        FROM drops WHERE user_id = $1 ORDER BY created_at DESC LIMIT 50`,
       [userId]
     );
@@ -27,13 +27,10 @@ router.get('/', async (req, res) => {
       [userId]
     );
 
-    const limits = getPlanLimits(res.locals.user.plan);
-
     res.render('dashboard', {
       title: 'Dashboard',
       drops: drops.rows,
       stats: stats.rows[0],
-      limits,
     });
 
   } catch (err) {

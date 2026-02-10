@@ -1,145 +1,87 @@
-<!-- Hero -->
-<section class="gd-hero">
-  <div class="max-w-4xl mx-auto px-4 py-20 sm:py-32 text-center">
-    <div class="gd-hero-badge">End-to-end encrypted</div>
-    <h1 class="text-4xl sm:text-6xl font-extrabold text-white mt-6 leading-tight">
-      Share secrets that<br>
-      <span class="gd-gradient-text">self-destruct</span>
-    </h1>
-    <p class="mt-6 text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto">
-      Send passwords, API keys, and sensitive messages that disappear after being read.
-      AES-256 encrypted. No trace left behind.
-    </p>
-    <div class="mt-10 flex flex-col sm:flex-row justify-center gap-4">
-      <a href="/new" class="gd-btn-primary text-lg px-8 py-4">
-        Create a Drop &rarr;
-      </a>
-      <a href="/pricing" class="gd-btn-secondary text-lg px-8 py-4">
-        View Pricing
-      </a>
-    </div>
-    <p class="mt-4 text-sm text-gray-500">No account needed for basic drops. Free forever.</p>
+<div class="hero">
+  <div class="hero-tag">// encrypted. viewed. destroyed.</div>
+  <h1><span data-scramble>Your secrets.</span><br><span class="accent" data-scramble>Gone in one click.</span></h1>
+  <p class="hero-sub">Stop pasting passwords in Slack. GhostDrop creates encrypted links that self-destruct after being read. No trace. No history. No compromise.</p>
+  <div class="hero-actions">
+    <a href="/new" class="btn btn-lime">Create a drop</a>
+    <a href="#how" class="btn btn-outline">How it works</a>
   </div>
-</section>
+</div>
 
-<!-- How it works -->
-<section class="py-20">
-  <div class="max-w-5xl mx-auto px-4">
-    <h2 class="text-3xl font-bold text-white text-center">How It Works</h2>
-    <p class="text-gray-400 text-center mt-2">Three steps. Zero traces.</p>
+<% if (adsenseId) { %><div class="ad-slot"><ins class="adsbygoogle" style="display:block" data-ad-client="<%= adsenseId %>" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div><% } %>
 
-    <div class="grid md:grid-cols-3 gap-8 mt-12">
-      <div class="gd-card text-center">
-        <div class="gd-step-number">1</div>
-        <h3 class="text-xl font-semibold text-white mt-4">Write your secret</h3>
-        <p class="text-gray-400 mt-2">Paste a password, API key, private note, or any sensitive text. Optionally set a password and expiry.</p>
+<div class="section-dark" id="how">
+  <div class="section">
+    <div class="section-tag">// how it works</div>
+    <h2>Three steps. Zero traces.</h2>
+    <div class="grid-3">
+      <div>
+        <div style="font-family:var(--mono);color:var(--lime);font-size:.7rem;margin-bottom:.5rem">01</div>
+        <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:.4rem">Paste your secret</h3>
+        <p style="color:var(--dim);font-size:.875rem;line-height:1.6">Password, API key, private note. Whatever you need to share. It gets AES-256-GCM encrypted before touching our database.</p>
       </div>
-      <div class="gd-card text-center">
-        <div class="gd-step-number">2</div>
-        <h3 class="text-xl font-semibold text-white mt-4">Share the link</h3>
-        <p class="text-gray-400 mt-2">Get a unique one-time URL. Send it via chat, email, or any channel. The secret is encrypted in transit.</p>
+      <div>
+        <div style="font-family:var(--mono);color:var(--lime);font-size:.7rem;margin-bottom:.5rem">02</div>
+        <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:.4rem">Share the link</h3>
+        <p style="color:var(--dim);font-size:.875rem;line-height:1.6">Get a one-time URL + QR code. Send it however you want. The actual secret never leaves our encrypted vault until the moment it's read.</p>
       </div>
-      <div class="gd-card text-center">
-        <div class="gd-step-number">3</div>
-        <h3 class="text-xl font-semibold text-white mt-4">It self-destructs</h3>
-        <p class="text-gray-400 mt-2">Once read, the drop is permanently destroyed. No copies, no cache, no trace. Gone forever.</p>
+      <div>
+        <div style="font-family:var(--mono);color:var(--lime);font-size:.7rem;margin-bottom:.5rem">03</div>
+        <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:.4rem">It self-destructs</h3>
+        <p style="color:var(--dim);font-size:.875rem;line-height:1.6">Recipient reads it. Content is permanently destroyed. You get notified. The link is dead forever. Like it never existed.</p>
       </div>
     </div>
   </div>
-</section>
+</div>
 
-<!-- Features -->
-<section class="py-20 gd-section-alt">
-  <div class="max-w-5xl mx-auto px-4">
-    <h2 class="text-3xl font-bold text-white text-center">Built for Security</h2>
-    <div class="grid md:grid-cols-2 gap-6 mt-12">
-      <div class="gd-feature">
-        <div class="gd-feature-icon">&#128274;</div>
-        <div>
-          <h3 class="font-semibold text-white text-lg">AES-256-GCM Encryption</h3>
-          <p class="text-gray-400 mt-1">Military-grade encryption. Your secrets are encrypted before storage and the key never touches our database.</p>
-        </div>
-      </div>
-      <div class="gd-feature">
-        <div class="gd-feature-icon">&#128163;</div>
-        <div>
-          <h3 class="font-semibold text-white text-lg">Burn After Reading</h3>
-          <p class="text-gray-400 mt-1">Drops are permanently destroyed after being viewed. Configure 1-view or multi-view burns.</p>
-        </div>
-      </div>
-      <div class="gd-feature">
-        <div class="gd-feature-icon">&#9200;</div>
-        <div>
-          <h3 class="font-semibold text-white text-lg">Auto-Expiry</h3>
-          <p class="text-gray-400 mt-1">Set drops to expire in 1 hour, 24 hours, 7 days, or 30 days. Expired drops are purged automatically.</p>
-        </div>
-      </div>
-      <div class="gd-feature">
-        <div class="gd-feature-icon">&#128273;</div>
-        <div>
-          <h3 class="font-semibold text-white text-lg">Password Protection</h3>
-          <p class="text-gray-400 mt-1">Add an extra layer with a password. Share the link in one channel, the password in another.</p>
-        </div>
-      </div>
-      <div class="gd-feature">
-        <div class="gd-feature-icon">&#128268;</div>
-        <div>
-          <h3 class="font-semibold text-white text-lg">REST API</h3>
-          <p class="text-gray-400 mt-1">Integrate GhostDrop into your workflow. Create and retrieve drops programmatically.</p>
-        </div>
-      </div>
-      <div class="gd-feature">
-        <div class="gd-feature-icon">&#128276;</div>
-        <div>
-          <h3 class="font-semibold text-white text-lg">Burn Notifications</h3>
-          <p class="text-gray-400 mt-1">Get notified when your drop is opened. Know exactly when your secret was read.</p>
-        </div>
-      </div>
+<div class="section">
+  <div class="section-tag">// why this exists</div>
+  <h2>Because Slack search is forever.</h2>
+  <div style="max-width:700px">
+    <div class="feat">
+      <div class="feat-num">01</div>
+      <div><div class="feat-title">Key-separated encryption</div><div class="feat-desc">The decryption key only exists in the URL. We store a hash for lookup, not the key itself. A database breach reveals nothing.</div></div>
+    </div>
+    <div class="feat">
+      <div class="feat-num">02</div>
+      <div><div class="feat-title">Configurable burn</div><div class="feat-desc">One view and it's gone. Or set 5, 10, even 10,000 views for team-wide secrets. You control the blast radius.</div></div>
+    </div>
+    <div class="feat">
+      <div class="feat-num">03</div>
+      <div><div class="feat-title">Viewer intel</div><div class="feat-desc">Know exactly when your drop was opened, from what browser and OS. Burn notifications hit your dashboard in real-time.</div></div>
+    </div>
+    <div class="feat">
+      <div class="feat-num">04</div>
+      <div><div class="feat-title">Password protection</div><div class="feat-desc">Share the link in Slack. Send the password via text. Two channels, zero risk of interception on either one alone.</div></div>
+    </div>
+    <div class="feat">
+      <div class="feat-num">05</div>
+      <div><div class="feat-title">Operation codenames</div><div class="feat-desc">Every drop gets a random codename like "Shadow Falcon" or "Ghost Protocol". Track drops by name, not by meaningless IDs.</div></div>
+    </div>
+    <div class="feat">
+      <div class="feat-num">06</div>
+      <div><div class="feat-title">REST API</div><div class="feat-desc">Create and retrieve drops programmatically. One curl command from your CI/CD pipeline. Full docs at /api-docs.</div></div>
     </div>
   </div>
-</section>
+</div>
 
-<!-- Use cases -->
-<section class="py-20">
-  <div class="max-w-5xl mx-auto px-4">
-    <h2 class="text-3xl font-bold text-white text-center">Use Cases</h2>
-    <div class="grid md:grid-cols-3 gap-6 mt-12">
-      <div class="gd-card">
-        <h3 class="font-semibold text-purple-400 text-lg">DevOps & Engineering</h3>
-        <p class="text-gray-400 mt-2">Share API keys, database credentials, SSH keys, and config secrets with your team securely.</p>
-      </div>
-      <div class="gd-card">
-        <h3 class="font-semibold text-purple-400 text-lg">HR & Onboarding</h3>
-        <p class="text-gray-400 mt-2">Send new hires their initial passwords, VPN credentials, and access tokens without leaving a paper trail.</p>
-      </div>
-      <div class="gd-card">
-        <h3 class="font-semibold text-purple-400 text-lg">Personal Privacy</h3>
-        <p class="text-gray-400 mt-2">Share WiFi passwords, account info, or private notes that you don't want lingering in chat history.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Email capture -->
-<section class="py-16 gd-section-alt">
-  <div class="max-w-xl mx-auto px-4 text-center">
-    <h2 class="text-2xl font-bold text-white">Get Security Tips &amp; Product Updates</h2>
-    <p class="text-gray-400 mt-2">Join the mailing list. No spam, unsubscribe anytime.</p>
-    <form method="POST" action="/subscribe" class="mt-6 flex gap-2">
+<div class="section-dark">
+  <div class="section" style="text-align:center;max-width:600px">
+    <div class="section-tag">// newsletter</div>
+    <h2>Security tips &amp; updates</h2>
+    <p style="color:var(--dim);margin-bottom:1.5rem;font-size:.9rem">No spam. Unsubscribe anytime.</p>
+    <form method="POST" action="/subscribe" style="display:flex;gap:0;border:1px solid var(--border)">
       <input type="hidden" name="source" value="landing">
-      <input type="email" name="email" required placeholder="you@company.com" class="gd-input flex-1">
-      <button type="submit" class="gd-btn-primary px-6 whitespace-nowrap">Subscribe</button>
+      <input type="email" name="email" required placeholder="you@company.com" class="fi" style="border:none;flex:1">
+      <button type="submit" class="btn btn-lime" style="white-space:nowrap">Subscribe</button>
     </form>
   </div>
-</section>
+</div>
 
-<!-- CTA -->
-<section class="py-20 text-center">
-  <div class="max-w-3xl mx-auto px-4">
-    <h2 class="text-3xl font-bold text-white">Ready to drop a secret?</h2>
-    <p class="text-gray-400 mt-4 text-lg">It's free. No account required. Takes 10 seconds.</p>
-    <a href="/new" class="gd-btn-primary text-lg px-10 py-4 mt-8 inline-block">
-      Create a Drop &rarr;
-    </a>
-  </div>
-</section>
+<% if (adsenseId) { %><div class="ad-slot"><ins class="adsbygoogle" style="display:block" data-ad-client="<%= adsenseId %>" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div><% } %>
+
+<div class="section" style="text-align:center;padding-bottom:5rem">
+  <h2 style="font-size:2rem">Ready?</h2>
+  <p style="color:var(--dim);margin:.75rem 0 2rem">Free. No account needed. Takes 10 seconds.</p>
+  <a href="/new" class="btn btn-lime">Create a drop</a>
+</div>

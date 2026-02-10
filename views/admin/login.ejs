@@ -1,0 +1,10 @@
+<div class="auth-wrap">
+  <h2 style="font-size:1.5rem;color:#ff8c00">Admin Access</h2>
+  <p style="color:var(--dim);font-size:.85rem;margin-top:.25rem">Authorized personnel only.</p>
+  <% if (error) { %><div class="flash flash-error" style="margin:1rem 0"><%= error %></div><% } %>
+  <form method="POST" action="/ghost-admin" style="margin-top:1.5rem">
+    <div class="fg"><label class="fl" for="password">Password</label><input type="password" name="password" id="password" class="fi" required autofocus placeholder="Admin password"></div>
+    <button type="submit" class="btn btn-full" style="background:#ff8c00;color:#000">Authenticate</button>
+  </form>
+  <p style="text-align:center;font-size:.75rem;color:var(--muted);margin-top:1.5rem"><a href="/">Back to site</a></p>
+</div>

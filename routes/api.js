@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 const rateLimit = require('express-rate-limit');
 const { pool } = require('../db');
 const { encrypt, decrypt, hashSlug, generateSlug, hashIP } = require('../utils/crypto');
-const { getPlanLimits } = require('../middleware/auth');
+const { generateCodename } = require('../utils/codenames');
 
 const router = express.Router();
 
@@ -42,11 +42,6 @@ async function apiAuth(req, res, next) {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
 
-    const limits = getPlanLimits(user.plan);
-    if (!limits.apiAccess) {
-      return res.status(403).json({ error: 'API access requires a Pro or Business plan.' });
-    }
-
     req.apiUser = user;
     next();
   } catch (err) {
@@ -59,14 +54,13 @@ router.post('/drops', apiAuth, async (req, res) => {
   try {
     const { content, password, expiry_hours, max_views, label } = req.body;
     const user = req.apiUser;
-    const limits = getPlanLimits(user.plan);
 
     if (!content || content.trim().length === 0) {
       return res.status(400).json({ error: 'Content is required' });
     }
 
-    if (content.length > limits.maxContentLength) {
-      return res.status(400).json({ error: `Content exceeds maximum length (${limits.maxContentLength} chars)` });
+    if (content.length > 100000) {
+      return res.status(400).json({ error: 'Content exceeds maximum length (100000 chars)' });
     }
 
     let hasPassword = false;
@@ -76,18 +70,19 @@ router.post('/drops', apiAuth, async (req, res) => {
       passwordHash = await bcrypt.hash(password, 10);
     }
 
-    const expiryHours = Math.min(parseInt(expiry_hours) || 24, limits.maxExpiry);
+    const expiryHours = Math.min(parseInt(expiry_hours) || 24, 720);
     const expiresAt = new Date(Date.now() + expiryHours * 60 * 60 * 1000);
-    const maxViewsVal = Math.min(Math.max(parseInt(max_views) || 1, 1), limits.maxViews);
+    const maxViewsVal = Math.min(Math.max(parseInt(max_views) || 1, 1), 10000);
+    const codename = generateCodename();
 
     const slug = generateSlug();
     const slugHash = hashSlug(slug);
     const encrypted = encrypt(content, slug);
 
     await pool.query(
-      `INSERT INTO drops (slug_hash, user_id, encrypted_content, iv, auth_tag, has_password, password_hash, max_views, expires_at, label, notify)
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, TRUE)`,
-      [slugHash, user.id, encrypted.encrypted, encrypted.iv, encrypted.authTag, hasPassword, passwordHash, maxViewsVal, expiresAt, label || null]
+      `INSERT INTO drops (slug_hash, user_id, encrypted_content, iv, auth_tag, has_password, password_hash, max_views, expires_at, label, codename, notify)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, TRUE)`,
+      [slugHash, user.id, encrypted.encrypted, encrypted.iv, encrypted.authTag, hasPassword, passwordHash, maxViewsVal, expiresAt, label || null, codename]
     );
 
     const dropUrl = `${req.protocol}://${req.get('host')}/d/${slug}`;
@@ -95,6 +90,7 @@ router.post('/drops', apiAuth, async (req, res) => {
     res.status(201).json({
       url: dropUrl,
       slug,
+      codename,
       expires_at: expiresAt.toISOString(),
       max_views: maxViewsVal,
       has_password: hasPassword,
@@ -151,7 +147,7 @@ router.get('/drops/:slug', async (req, res) => {
     );
 
     if (drop.notify && drop.user_id) {
-      const dropLabel = drop.label || slug.slice(0, 8) + '...';
+      const dropLabel = drop.codename || drop.label || slug.slice(0, 8) + '...';
       await pool.query(
         'INSERT INTO notifications (user_id, message) VALUES ($1, $2)',
         [drop.user_id, `[API] Your drop "${dropLabel}" was viewed${willDestroy ? ' and destroyed' : ''}.`]
@@ -174,7 +170,7 @@ router.get('/drops/:slug', async (req, res) => {
 router.get('/drops', apiAuth, async (req, res) => {
   try {
     const drops = await pool.query(
-      `SELECT id, label, has_password, max_views, current_views, is_destroyed, expires_at, created_at
+      `SELECT id, label, codename, has_password, max_views, current_views, is_destroyed, expires_at, created_at
        FROM drops WHERE user_id = $1 ORDER BY created_at DESC LIMIT 100`,
       [req.apiUser.id]
     );

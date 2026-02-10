@@ -1,89 +1,90 @@
-<section class="py-12">
-  <div class="max-w-3xl mx-auto px-4">
-    <h1 class="text-3xl font-bold text-white">API Documentation</h1>
-    <p class="text-gray-400 mt-2">Integrate GhostDrop into your apps and workflows. <span class="gd-pro-badge">PRO</span></p>
+<div class="section" style="padding-top:5rem">
+  <div class="section-tag">// api reference</div>
+  <h1 style="font-size:2.5rem">API Documentation</h1>
+  <p style="color:var(--dim);max-width:550px;margin-top:1rem;line-height:1.7">
+    Integrate GhostDrop into your apps and workflows. Create and retrieve self-destructing drops programmatically.
+  </p>
 
-    <!-- Auth -->
-    <div class="mt-10">
-      <h2 class="text-2xl font-semibold text-white">Authentication</h2>
-      <p class="text-gray-400 mt-2">All API requests require a Bearer token. The token is your email and password, base64-encoded:</p>
-      <pre class="gd-code mt-4"><code># Generate your token
+  <!-- Authentication -->
+  <div style="margin-top:3rem">
+    <h2>Authentication</h2>
+    <p style="color:var(--dim);margin-top:.75rem">All API requests require a Bearer token. The token is your email and password, base64-encoded:</p>
+    <pre style="background:var(--bg2);border:1px solid var(--border);padding:1.25rem;margin-top:1rem;overflow-x:auto"><code style="font-family:var(--mono);font-size:.8rem;color:var(--green);line-height:1.7"># Generate your token
 echo -n "your@email.com:yourpassword" | base64
 
 # Use in requests
 curl -H "Authorization: Bearer YOUR_TOKEN" ...</code></pre>
-    </div>
+  </div>
 
-    <!-- Create Drop -->
-    <div class="mt-10">
-      <h2 class="text-2xl font-semibold text-white">Create a Drop</h2>
-      <div class="gd-endpoint mt-4">
-        <span class="gd-method-post">POST</span>
-        <code>/api/drops</code>
-      </div>
-      <h3 class="text-lg font-medium text-gray-300 mt-4">Request Body (JSON)</h3>
-      <pre class="gd-code mt-2"><code>{
+  <!-- Create Drop -->
+  <div style="margin-top:3rem">
+    <h2>Create a Drop</h2>
+    <div style="margin-top:1rem;display:flex;align-items:center;gap:.75rem">
+      <span style="font-family:var(--mono);font-size:.7rem;font-weight:700;background:var(--lime);color:#000;padding:.25rem .6rem;text-transform:uppercase;letter-spacing:.06em">POST</span>
+      <code style="font-family:var(--mono);font-size:.85rem;color:var(--text)">/api/drops</code>
+    </div>
+    <h3 style="font-size:1rem;color:var(--dim);margin-top:1.5rem;font-weight:600">Request Body (JSON)</h3>
+    <pre style="background:var(--bg2);border:1px solid var(--border);padding:1.25rem;margin-top:.75rem;overflow-x:auto"><code style="font-family:var(--mono);font-size:.8rem;color:var(--green);line-height:1.7">{
   "content": "my-secret-api-key-12345",
   "password": "optional-password",
   "expiry_hours": 24,
   "max_views": 1,
   "label": "API key for staging"
 }</code></pre>
-      <h3 class="text-lg font-medium text-gray-300 mt-4">Response</h3>
-      <pre class="gd-code mt-2"><code>{
+    <h3 style="font-size:1rem;color:var(--dim);margin-top:1.5rem;font-weight:600">Response</h3>
+    <pre style="background:var(--bg2);border:1px solid var(--border);padding:1.25rem;margin-top:.75rem;overflow-x:auto"><code style="font-family:var(--mono);font-size:.8rem;color:var(--green);line-height:1.7">{
   "url": "https://ghostdrop.app/d/aBcDeFgHiJkLmNoPqRsTuV",
   "slug": "aBcDeFgHiJkLmNoPqRsTuV",
   "expires_at": "2025-01-16T12:00:00.000Z",
   "max_views": 1,
   "has_password": false
 }</code></pre>
-    </div>
+  </div>
 
-    <!-- Retrieve Drop -->
-    <div class="mt-10">
-      <h2 class="text-2xl font-semibold text-white">Retrieve a Drop</h2>
-      <div class="gd-endpoint mt-4">
-        <span class="gd-method-get">GET</span>
-        <code>/api/drops/:slug</code>
-      </div>
-      <p class="text-gray-400 mt-2">No authentication required. For password-protected drops, pass <code class="text-purple-400">?password=yourpassword</code>.</p>
-      <pre class="gd-code mt-4"><code>curl https://ghostdrop.app/api/drops/aBcDeFgHiJkLmNoPqRsTuV</code></pre>
-      <h3 class="text-lg font-medium text-gray-300 mt-4">Response</h3>
-      <pre class="gd-code mt-2"><code>{
+  <!-- Retrieve Drop -->
+  <div style="margin-top:3rem">
+    <h2>Retrieve a Drop</h2>
+    <div style="margin-top:1rem;display:flex;align-items:center;gap:.75rem">
+      <span style="font-family:var(--mono);font-size:.7rem;font-weight:700;background:var(--green);color:#000;padding:.25rem .6rem;text-transform:uppercase;letter-spacing:.06em">GET</span>
+      <code style="font-family:var(--mono);font-size:.85rem;color:var(--text)">/api/drops/:slug</code>
+    </div>
+    <p style="color:var(--dim);margin-top:.75rem">No authentication required. For password-protected drops, pass <code style="font-family:var(--mono);color:var(--lime)">?password=yourpassword</code>.</p>
+    <pre style="background:var(--bg2);border:1px solid var(--border);padding:1.25rem;margin-top:1rem;overflow-x:auto"><code style="font-family:var(--mono);font-size:.8rem;color:var(--green);line-height:1.7">curl https://ghostdrop.app/api/drops/aBcDeFgHiJkLmNoPqRsTuV</code></pre>
+    <h3 style="font-size:1rem;color:var(--dim);margin-top:1.5rem;font-weight:600">Response</h3>
+    <pre style="background:var(--bg2);border:1px solid var(--border);padding:1.25rem;margin-top:.75rem;overflow-x:auto"><code style="font-family:var(--mono);font-size:.8rem;color:var(--green);line-height:1.7">{
   "content": "my-secret-api-key-12345",
   "destroyed": true,
   "views_remaining": 0
 }</code></pre>
-    </div>
-
-    <!-- List Drops -->
-    <div class="mt-10">
-      <h2 class="text-2xl font-semibold text-white">List Your Drops</h2>
-      <div class="gd-endpoint mt-4">
-        <span class="gd-method-get">GET</span>
-        <code>/api/drops</code>
-      </div>
-      <p class="text-gray-400 mt-2">Requires authentication. Returns your most recent 100 drops.</p>
-    </div>
-
-    <!-- Delete Drop -->
-    <div class="mt-10">
-      <h2 class="text-2xl font-semibold text-white">Delete a Drop</h2>
-      <div class="gd-endpoint mt-4">
-        <span class="gd-method-delete">DELETE</span>
-        <code>/api/drops/:id</code>
-      </div>
-      <p class="text-gray-400 mt-2">Requires authentication. Permanently destroys the specified drop.</p>
-    </div>
-
-    <!-- Rate Limits -->
-    <div class="mt-10">
-      <h2 class="text-2xl font-semibold text-white">Rate Limits</h2>
-      <p class="text-gray-400 mt-2">API requests are limited to 60 requests per minute. Response headers include rate limit info.</p>
-    </div>
-
-    <div class="mt-10 text-center">
-      <a href="/register" class="gd-btn-primary px-8 py-3">Get API Access &rarr;</a>
-    </div>
   </div>
-</section>
+
+  <!-- List Drops -->
+  <div style="margin-top:3rem">
+    <h2>List Your Drops</h2>
+    <div style="margin-top:1rem;display:flex;align-items:center;gap:.75rem">
+      <span style="font-family:var(--mono);font-size:.7rem;font-weight:700;background:var(--green);color:#000;padding:.25rem .6rem;text-transform:uppercase;letter-spacing:.06em">GET</span>
+      <code style="font-family:var(--mono);font-size:.85rem;color:var(--text)">/api/drops</code>
+    </div>
+    <p style="color:var(--dim);margin-top:.75rem">Requires authentication. Returns your most recent 100 drops.</p>
+  </div>
+
+  <!-- Delete Drop -->
+  <div style="margin-top:3rem">
+    <h2>Delete a Drop</h2>
+    <div style="margin-top:1rem;display:flex;align-items:center;gap:.75rem">
+      <span style="font-family:var(--mono);font-size:.7rem;font-weight:700;background:var(--red);color:#fff;padding:.25rem .6rem;text-transform:uppercase;letter-spacing:.06em">DELETE</span>
+      <code style="font-family:var(--mono);font-size:.85rem;color:var(--text)">/api/drops/:id</code>
+    </div>
+    <p style="color:var(--dim);margin-top:.75rem">Requires authentication. Permanently destroys the specified drop.</p>
+  </div>
+
+  <!-- Rate Limits -->
+  <div style="margin-top:3rem">
+    <h2>Rate Limits</h2>
+    <p style="color:var(--dim);margin-top:.75rem">API requests are limited to 60 requests per minute. Response headers include rate limit info.</p>
+  </div>
+
+  <div style="margin-top:3rem;text-align:center">
+    <a href="/register" class="btn btn-lime">Get API Access</a>
+  </div>
+</div>

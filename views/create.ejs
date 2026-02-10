@@ -1,114 +1,56 @@
-<section class="py-12">
-  <div class="max-w-2xl mx-auto px-4">
-    <h1 class="text-3xl font-bold text-white">Create a Drop</h1>
-    <p class="text-gray-400 mt-2">Your secret will be encrypted and destroyed after viewing.</p>
+<div class="section" style="max-width:600px;margin:0 auto">
+  <div class="section-tag">// new drop</div>
+  <h2>Drop a secret</h2>
+  <p style="color:var(--dim);font-size:.9rem;margin-bottom:2rem">Encrypted on creation. Destroyed after viewing.</p>
 
-    <form method="POST" action="/new" class="mt-8 space-y-6" id="create-form">
-      <!-- Content -->
-      <div>
-        <label for="content" class="gd-label">Secret Content</label>
-        <textarea
-          name="content"
-          id="content"
-          rows="8"
-          class="gd-textarea"
-          placeholder="Paste your password, API key, or secret message here..."
-          required
-          maxlength="<%= limits.maxContentLength %>"
-        ></textarea>
-        <div class="flex justify-between mt-1">
-          <span class="text-xs text-gray-500">AES-256-GCM encrypted</span>
-          <span class="text-xs text-gray-500" id="char-count">0 / <%= (limits.maxContentLength / 1000).toFixed(0) %>K</span>
-        </div>
+  <form method="POST" action="/new" id="create-form">
+    <div class="fg">
+      <label class="fl" for="content">Secret content</label>
+      <textarea name="content" id="content" rows="8" class="ft" placeholder="Paste your password, API key, or secret here..." required maxlength="500000"></textarea>
+      <div style="display:flex;justify-content:space-between;margin-top:.3rem"><span class="fhint">AES-256-GCM encrypted</span><span class="fhint" id="char-count">0</span></div>
+    </div>
+
+    <div class="fr">
+      <div class="fg">
+        <label class="fl" for="expiry">Expires after</label>
+        <select name="expiry" id="expiry" class="fs">
+          <option value="1">1 hour</option>
+          <option value="24" selected>24 hours</option>
+          <option value="168">7 days</option>
+          <option value="720">30 days</option>
+        </select>
       </div>
-
-      <!-- Options row -->
-      <div class="grid sm:grid-cols-2 gap-4">
-        <!-- Expiry -->
-        <div>
-          <label for="expiry" class="gd-label">Expires After</label>
-          <select name="expiry" id="expiry" class="gd-select">
-            <option value="1">1 hour</option>
-            <option value="24" selected>24 hours</option>
-            <% if (limits.maxExpiry >= 168) { %>
-              <option value="168">7 days</option>
-            <% } %>
-            <% if (limits.maxExpiry >= 720) { %>
-              <option value="720">30 days</option>
-            <% } %>
-          </select>
-        </div>
-
-        <!-- Max Views -->
-        <div>
-          <label for="max_views" class="gd-label">Max Views</label>
-          <select name="max_views" id="max_views" class="gd-select">
-            <option value="1" selected>1 (burn after reading)</option>
-            <% if (limits.maxViews >= 3) { %>
-              <option value="3">3 views</option>
-            <% } %>
-            <% if (limits.maxViews >= 5) { %>
-              <option value="5">5 views</option>
-            <% } %>
-            <% if (limits.maxViews >= 10) { %>
-              <option value="10">10 views</option>
-            <% } %>
-            <% if (limits.maxViews >= 100) { %>
-              <option value="100">100 views</option>
-            <% } %>
-          </select>
-        </div>
+      <div class="fg">
+        <label class="fl" for="max_views">Max views</label>
+        <select name="max_views" id="max_views" class="fs">
+          <option value="1" selected>1 (burn after reading)</option>
+          <option value="3">3 views</option>
+          <option value="5">5 views</option>
+          <option value="10">10 views</option>
+          <option value="100">100 views</option>
+        </select>
       </div>
+    </div>
 
-      <!-- Password -->
-      <div>
-        <label for="password" class="gd-label">
-          Password Protection
-          <% if (plan === 'free') { %>
-            <span class="gd-pro-badge">PRO</span>
-          <% } %>
-        </label>
-        <input
-          type="text"
-          name="password"
-          id="password"
-          class="gd-input"
-          placeholder="Optional - add a password for extra security"
-          <%= plan === 'free' ? 'disabled' : '' %>
-        >
-        <% if (plan === 'free') { %>
-          <p class="text-xs text-gray-500 mt-1">
-            <a href="/pricing" class="text-purple-400 hover:text-purple-300">Upgrade to Pro</a> to use password protection.
-          </p>
-        <% } %>
+    <div class="fg">
+      <label class="fl" for="password">Password (optional)</label>
+      <input type="text" name="password" id="password" class="fi" placeholder="Add a password for extra security">
+    </div>
+
+    <% if (user) { %>
+    <div class="fr">
+      <div class="fg">
+        <label class="fl" for="label">Label (private)</label>
+        <input type="text" name="label" id="label" class="fi" placeholder="e.g. DB creds for John" maxlength="255">
       </div>
-
-      <% if (user) { %>
-        <!-- Label & Notify -->
-        <div class="grid sm:grid-cols-2 gap-4">
-          <div>
-            <label for="label" class="gd-label">Label (private, for your dashboard)</label>
-            <input type="text" name="label" id="label" class="gd-input" placeholder="e.g. DB password for John" maxlength="255">
-          </div>
-          <div class="flex items-end">
-            <label class="gd-checkbox-label">
-              <input type="checkbox" name="notify" class="gd-checkbox">
-              <span>Notify me when viewed</span>
-            </label>
-          </div>
-        </div>
-      <% } %>
-
-      <button type="submit" class="gd-btn-primary w-full py-4 text-lg" id="create-btn">
-        Encrypt &amp; Create Drop
-      </button>
-    </form>
-
-    <% if (!user) { %>
-      <p class="text-center text-sm text-gray-500 mt-6">
-        <a href="/register" class="text-purple-400 hover:text-purple-300">Create an account</a>
-        to track your drops, get notifications, and unlock premium features.
-      </p>
+      <div class="fg" style="display:flex;align-items:flex-end;padding-bottom:1.25rem">
+        <label class="fcheck"><input type="checkbox" name="notify"> Notify me when viewed</label>
+      </div>
+    </div>
     <% } %>
-  </div>
-</section>
+
+    <button type="submit" class="btn btn-lime btn-full" style="margin-top:.5rem">Encrypt &amp; create drop</button>
+  </form>
+
+  <% if (!user) { %><p style="text-align:center;font-size:.8rem;color:var(--muted);margin-top:1.5rem"><a href="/register">Create an account</a> to track drops and get burn notifications.</p><% } %>
+</div>

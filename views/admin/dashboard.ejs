@@ -1,0 +1,206 @@
+<div class="dash-wrap">
+  <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-bottom:2rem">
+    <div>
+      <h1 style="font-size:1.5rem;font-weight:800;color:#ff8c00">Command Center</h1>
+      <p style="color:var(--dim);font-size:.8rem;font-family:var(--mono)">// system overview</p>
+    </div>
+    <div style="display:flex;gap:.5rem">
+      <a href="/ghost-admin/export/subscribers" class="btn btn-sm btn-outline">Export Subs</a>
+      <a href="/new" class="btn btn-lime btn-sm">New Drop</a>
+    </div>
+  </div>
+
+  <!-- ─── CORE METRICS ─── -->
+  <div class="admin-grid">
+    <div class="admin-stat"><span class="admin-stat-num"><%= stats.users %></span><span class="admin-stat-label">Users</span></div>
+    <div class="admin-stat"><span class="admin-stat-num"><%= stats.drops %></span><span class="admin-stat-label">Total Drops</span></div>
+    <div class="admin-stat"><span class="admin-stat-num"><%= stats.activeDrops %></span><span class="admin-stat-label">Live</span></div>
+    <div class="admin-stat"><span class="admin-stat-num"><%= stats.destroyedDrops %></span><span class="admin-stat-label">Dead</span></div>
+  </div>
+
+  <div class="admin-grid" style="margin-top:1px">
+    <div class="admin-stat"><span class="admin-stat-num"><%= stats.subscribers %></span><span class="admin-stat-label">Subscribers</span></div>
+    <div class="admin-stat"><span class="admin-stat-num"><%= stats.viewsToday %></span><span class="admin-stat-label">Views Today</span></div>
+    <div class="admin-stat"><span class="admin-stat-num"><%= stats.viewsWeek %></span><span class="admin-stat-label">Views 7d</span></div>
+    <div class="admin-stat"><span class="admin-stat-num"><%= stats.viewsTotal %></span><span class="admin-stat-label">Views All</span></div>
+  </div>
+
+  <!-- ─── TRAFFIC BY DAY ─── -->
+  <div class="dash-section">
+    <h2>Traffic (Last 30 Days)</h2>
+    <% if (viewsByDay.length === 0) { %>
+      <p style="color:var(--muted);font-size:.85rem">No traffic data yet.</p>
+    <% } else { %>
+      <div style="overflow-x:auto">
+        <div style="display:flex;align-items:flex-end;gap:2px;height:120px;border-bottom:1px solid var(--border);padding-bottom:2px">
+          <% const maxViews = Math.max(...viewsByDay.map(d => parseInt(d.views))); %>
+          <% viewsByDay.reverse().forEach(d => { %>
+            <% const pct = maxViews > 0 ? (parseInt(d.views) / maxViews * 100) : 0; %>
+            <div title="<%= d.day %>: <%= d.views %> views" style="flex:1;min-width:8px;background:var(--lime);height:<%= Math.max(pct, 2) %>%;opacity:.8"></div>
+          <% }) %>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-top:.35rem">
+          <span style="font-family:var(--mono);font-size:.55rem;color:var(--muted)"><%= viewsByDay.length > 0 ? viewsByDay[0].day : '' %></span>
+          <span style="font-family:var(--mono);font-size:.55rem;color:var(--muted)"><%= viewsByDay.length > 0 ? viewsByDay[viewsByDay.length-1].day : '' %></span>
+        </div>
+      </div>
+    <% } %>
+  </div>
+
+  <!-- ─── TOP PAGES ─── -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:2rem">
+    <div class="dash-section" style="margin-top:0">
+      <h2>Top Pages</h2>
+      <% if (topPages.length === 0) { %>
+        <p style="color:var(--muted);font-size:.85rem">No data yet.</p>
+      <% } else { %>
+        <% topPages.forEach(p => { %>
+          <div style="display:flex;justify-content:space-between;padding:.4rem 0;border-bottom:1px solid rgba(34,34,34,.5);font-size:.8rem">
+            <span style="font-family:var(--mono);color:var(--dim);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:70%"><%= p.path %></span>
+            <span style="font-family:var(--mono);color:var(--lime)"><%= p.views %></span>
+          </div>
+        <% }) %>
+      <% } %>
+    </div>
+
+    <div class="dash-section" style="margin-top:0">
+      <h2>Top Referrers</h2>
+      <% if (topReferrers.length === 0) { %>
+        <p style="color:var(--muted);font-size:.85rem">No referrer data yet.</p>
+      <% } else { %>
+        <% topReferrers.forEach(r => { %>
+          <div style="display:flex;justify-content:space-between;padding:.4rem 0;border-bottom:1px solid rgba(34,34,34,.5);font-size:.8rem">
+            <span style="font-family:var(--mono);color:var(--dim);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:70%"><%= r.referrer %></span>
+            <span style="font-family:var(--mono);color:var(--lime)"><%= r.views %></span>
+          </div>
+        <% }) %>
+      <% } %>
+    </div>
+  </div>
+
+  <!-- ─── BROWSERS ─── -->
+  <div class="dash-section">
+    <h2>Browsers</h2>
+    <% if (topBrowsers.length === 0) { %>
+      <p style="color:var(--muted);font-size:.85rem">No browser data yet.</p>
+    <% } else { %>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap">
+        <% topBrowsers.forEach(b => { %>
+          <div style="border:1px solid var(--border);padding:.5rem .85rem">
+            <span style="font-family:var(--mono);font-size:.8rem;color:var(--text)"><%= b.browser || 'Unknown' %></span>
+            <span style="font-family:var(--mono);font-size:.75rem;color:var(--lime);margin-left:.5rem"><%= b.views %></span>
+          </div>
+        <% }) %>
+      </div>
+    <% } %>
+  </div>
+
+  <!-- ─── RECENT SIGNUPS ─── -->
+  <div class="dash-section">
+    <h2>Recent Signups</h2>
+    <% if (recentSignups.length === 0) { %>
+      <p style="color:var(--muted);font-size:.85rem">No signups yet.</p>
+    <% } else { %>
+      <div style="overflow-x:auto">
+        <table class="tbl">
+          <thead><tr><th>Email</th><th>Joined</th></tr></thead>
+          <tbody>
+          <% recentSignups.forEach(u => { %>
+            <tr>
+              <td style="font-family:var(--mono);font-size:.78rem"><%= u.email %></td>
+              <td style="font-size:.78rem"><%= new Date(u.created_at).toLocaleDateString('en-US', {month:'short', day:'numeric', hour:'2-digit', minute:'2-digit'}) %></td>
+            </tr>
+          <% }) %>
+          </tbody>
+        </table>
+      </div>
+    <% } %>
+  </div>
+
+  <!-- ─── RECENT DROPS ─── -->
+  <div class="dash-section">
+    <h2>Recent Drops</h2>
+    <% if (recentDrops.length === 0) { %>
+      <p style="color:var(--muted);font-size:.85rem">No drops yet.</p>
+    <% } else { %>
+      <div style="overflow-x:auto">
+        <table class="tbl">
+          <thead><tr><th>Codename</th><th>Status</th><th>Views</th><th>Protected</th><th>Created</th></tr></thead>
+          <tbody>
+          <% recentDrops.forEach(d => { %>
+            <tr>
+              <td style="font-family:var(--mono);font-size:.78rem;color:var(--text)"><%= d.codename || d.label || '(unnamed)' %></td>
+              <td><% if (d.is_destroyed) { %><span class="s-dead">DEAD</span><% } else { %><span class="s-active">LIVE</span><% } %></td>
+              <td style="font-family:var(--mono);font-size:.78rem"><%= d.current_views %>/<%= d.max_views %></td>
+              <td><%= d.has_password ? 'Yes' : '-' %></td>
+              <td style="font-size:.78rem"><%= new Date(d.created_at).toLocaleDateString('en-US', {month:'short', day:'numeric', hour:'2-digit', minute:'2-digit'}) %></td>
+            </tr>
+          <% }) %>
+          </tbody>
+        </table>
+      </div>
+    <% } %>
+  </div>
+
+  <!-- ─── RECENT PAGE VIEWS ─── -->
+  <div class="dash-section">
+    <h2>Live Feed (Recent Views)</h2>
+    <% if (recentViews.length === 0) { %>
+      <p style="color:var(--muted);font-size:.85rem">No page views yet.</p>
+    <% } else { %>
+      <div style="overflow-x:auto;max-height:400px;overflow-y:auto">
+        <table class="tbl">
+          <thead><tr><th>Path</th><th>Referrer</th><th>Browser</th><th>OS</th><th>Time</th></tr></thead>
+          <tbody>
+          <% recentViews.forEach(v => { %>
+            <tr>
+              <td style="font-family:var(--mono);font-size:.75rem;color:var(--lime)"><%= v.path %></td>
+              <td style="font-size:.75rem;max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"><%= v.referrer || '-' %></td>
+              <td style="font-size:.75rem"><%= v.browser || '-' %></td>
+              <td style="font-size:.75rem"><%= v.os || '-' %></td>
+              <td style="font-size:.75rem;white-space:nowrap"><%= new Date(v.created_at).toLocaleTimeString('en-US', {hour:'2-digit', minute:'2-digit'}) %></td>
+            </tr>
+          <% }) %>
+          </tbody>
+        </table>
+      </div>
+    <% } %>
+  </div>
+
+  <!-- ─── MARKETING TASKS ─── -->
+  <div class="dash-section" id="marketing">
+    <h2>Marketing Checklist</h2>
+    <% if (marketingTasks.length === 0) { %>
+      <p style="color:var(--muted);font-size:.85rem">No marketing tasks configured.</p>
+    <% } else { %>
+      <% let currentCat = ''; %>
+      <% marketingTasks.forEach(t => { %>
+        <% if (t.category !== currentCat) { currentCat = t.category; %>
+          <div style="margin-top:1.25rem;margin-bottom:.5rem"><span class="task-cat"><%= currentCat %></span></div>
+        <% } %>
+        <div class="task-item">
+          <div style="display:flex;align-items:center;gap:.75rem">
+            <form method="POST" action="/ghost-admin/tasks/<%= t.id %>/toggle" style="margin:0">
+              <button type="submit" class="btn-ghost" style="font-size:1rem;color:<%= t.is_done ? 'var(--green)' : 'var(--muted)' %>"><%= t.is_done ? '[x]' : '[ ]' %></button>
+            </form>
+            <span style="color:<%= t.is_done ? 'var(--muted)' : 'var(--text)' %>;font-size:.85rem;<%= t.is_done ? 'text-decoration:line-through' : '' %>"><%= t.title %></span>
+          </div>
+        </div>
+      <% }) %>
+      <%
+        const done = marketingTasks.filter(t => t.is_done).length;
+        const total = marketingTasks.length;
+        const pct = total > 0 ? Math.round(done / total * 100) : 0;
+      %>
+      <div style="margin-top:1.25rem;padding:.85rem;border:1px solid var(--border)">
+        <div style="display:flex;justify-content:space-between;font-family:var(--mono);font-size:.75rem;margin-bottom:.5rem">
+          <span style="color:var(--dim)">Progress</span>
+          <span style="color:var(--lime)"><%= done %>/<%= total %> (<%= pct %>%)</span>
+        </div>
+        <div style="height:4px;background:var(--border)">
+          <div style="height:100%;width:<%= pct %>%;background:var(--lime)"></div>
+        </div>
+      </div>
+    <% } %>
+  </div>
+</div>

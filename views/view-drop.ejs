@@ -1,61 +1,35 @@
-<section class="py-12">
-  <div class="max-w-2xl mx-auto px-4">
-    <div class="text-center">
-      <div class="gd-reveal-icon" id="reveal-icon">&#128274;</div>
-      <h1 class="text-2xl font-bold text-white mt-4" id="reveal-title">Decrypting...</h1>
-    </div>
+<div class="reveal-wrap">
+  <div class="reveal-status" id="status-text">// decrypting<span class="cursor-blink">_</span></div>
+  <% if (codename) { %><div class="codename" style="margin-top:.25rem">Operation: <%= codename %></div><% } %>
 
-    <div class="gd-card mt-8 hidden" id="content-card">
-      <div class="flex justify-between items-center mb-4">
-        <span class="text-sm text-gray-400">Decrypted content:</span>
-        <button onclick="copyContent()" id="copy-content-btn" class="text-sm text-purple-400 hover:text-purple-300">
-          Copy to clipboard
-        </button>
-      </div>
-      <pre class="gd-content-display" id="secret-content"><%= content %></pre>
+  <div id="content-card" style="display:none">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:1.25rem;margin-bottom:.5rem">
+      <span style="font-size:.75rem;color:var(--muted);font-family:var(--mono);text-transform:uppercase;letter-spacing:.1em">Decrypted content</span>
+      <button onclick="copyContent()" id="copy-content-btn" class="btn-ghost" style="font-family:var(--mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;color:var(--lime)">Copy</button>
     </div>
-
-    <% if (willDestroy) { %>
-      <div class="gd-warning-red mt-6 text-center" id="destroy-notice" style="display:none;">
-        This drop has been <strong>permanently destroyed</strong>. The content above is shown for the last time.
-        Refreshing this page will not show it again.
-      </div>
-    <% } else { %>
-      <div class="gd-warning mt-6 text-center" id="views-notice" style="display:none;">
-        <strong><%= viewsRemaining %></strong> view<%= viewsRemaining !== 1 ? 's' : '' %> remaining before this drop is destroyed.
-      </div>
-    <% } %>
-
-    <!-- Viral CTA: every drop recipient sees this -->
-    <div class="gd-viral-cta mt-10" id="actions" style="display:none;">
-      <div class="gd-card text-center" style="border-color: #6c5ce7;">
-        <p class="text-gray-300">This secret was sent securely with <strong class="text-white">GhostDrop</strong></p>
-        <p class="text-gray-400 text-sm mt-1">Self-destructing encrypted messages. Free to use.</p>
-        <div class="flex justify-center gap-3 mt-4">
-          <a href="/new" class="gd-btn-primary px-6 py-2">Send Your Own Secret</a>
-        </div>
-      </div>
-    </div>
+    <pre class="reveal-content" id="secret-content"><%= content %></pre>
   </div>
-</section>
+
+  <% if (willDestroy) { %>
+    <div class="reveal-destroyed" id="notice" style="display:none"><strong>Permanently destroyed.</strong> This content is shown for the last time. Refreshing will not show it again.</div>
+  <% } else { %>
+    <div class="reveal-remaining" id="notice" style="display:none"><strong><%= viewsRemaining %></strong> view<%= viewsRemaining !== 1 ? 's' : '' %> remaining before destruction.</div>
+  <% } %>
+
+  <div class="viral-cta" id="cta" style="display:none">
+    <p>Sent securely with <span class="brand">ghostdrop</span></p>
+    <p style="font-size:.75rem;margin-top:.25rem">Self-destructing encrypted messages. Free.</p>
+    <a href="/new" class="btn btn-lime btn-sm" style="margin-top:.75rem">Send your own secret</a>
+  </div>
+</div>
+
+<% if (adsenseId) { %><div class="ad-slot"><ins class="adsbygoogle" style="display:block" data-ad-client="<%= adsenseId %>" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div><% } %>
 
 <script>
-// Reveal animation
 setTimeout(() => {
-  document.getElementById('reveal-icon').innerHTML = '&#128275;';
-  document.getElementById('reveal-title').textContent = 'Secret Revealed';
-  document.getElementById('content-card').classList.remove('hidden');
-  const notice = document.getElementById('destroy-notice') || document.getElementById('views-notice');
-  if (notice) notice.style.display = 'block';
-  document.getElementById('actions').style.display = 'block';
-}, 800);
-
-function copyContent() {
-  const content = document.getElementById('secret-content').textContent;
-  navigator.clipboard.writeText(content).then(() => {
-    const btn = document.getElementById('copy-content-btn');
-    btn.textContent = 'Copied!';
-    setTimeout(() => { btn.textContent = 'Copy to clipboard'; }, 2000);
-  });
-}
+  document.getElementById('status-text').innerHTML = '// decrypted';
+  document.getElementById('content-card').style.display = 'block';
+  document.getElementById('notice').style.display = 'block';
+  document.getElementById('cta').style.display = 'block';
+}, 700);
 </script>

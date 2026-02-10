@@ -1,37 +1,77 @@
-// GhostDrop Client JS
-
 document.addEventListener('DOMContentLoaded', () => {
-  // Character counter on create form
-  const contentInput = document.getElementById('content');
-  const charCount = document.getElementById('char-count');
-  if (contentInput && charCount) {
-    contentInput.addEventListener('input', () => {
-      const len = contentInput.value.length;
-      if (len > 1000) {
-        charCount.textContent = `${(len / 1000).toFixed(1)}K / ${charCount.textContent.split('/')[1].trim()}`;
-      } else {
-        charCount.textContent = `${len} / ${charCount.textContent.split('/')[1].trim()}`;
-      }
+  // Text scramble effect for elements with data-scramble attribute
+  document.querySelectorAll('[data-scramble]').forEach(el => {
+    const final = el.textContent;
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%&*!?/\\';
+    let iterations = 0;
+    const interval = setInterval(() => {
+      el.textContent = final.split('').map((char, i) => {
+        if (i < iterations) return final[i];
+        return chars[Math.floor(Math.random() * chars.length)];
+      }).join('');
+      iterations += 1/2;
+      if (iterations >= final.length) clearInterval(interval);
+    }, 30);
+  });
+
+  // Character counter
+  const ta = document.getElementById('content');
+  const cc = document.getElementById('char-count');
+  if (ta && cc) {
+    ta.addEventListener('input', () => {
+      const l = ta.value.length;
+      cc.textContent = l > 1000 ? `${(l/1000).toFixed(1)}K` : l;
     });
   }
 
-  // Prevent double-submit on create form
-  const createForm = document.getElementById('create-form');
-  const createBtn = document.getElementById('create-btn');
-  if (createForm && createBtn) {
-    createForm.addEventListener('submit', () => {
-      createBtn.disabled = true;
-      createBtn.textContent = 'Encrypting...';
+  // Prevent double-submit
+  const cf = document.getElementById('create-form');
+  if (cf) {
+    cf.addEventListener('submit', () => {
+      const b = cf.querySelector('button[type=submit]');
+      if (b) { b.disabled = true; b.textContent = 'ENCRYPTING...'; }
     });
   }
 
-  // Auto-dismiss flash messages
-  const flash = document.querySelector('.gd-flash');
+  // Copy to clipboard
+  window.copyUrl = function() {
+    const input = document.getElementById('drop-url');
+    navigator.clipboard.writeText(input.value).then(() => {
+      const btn = document.getElementById('copy-btn');
+      btn.textContent = 'COPIED';
+      setTimeout(() => btn.textContent = 'COPY', 2000);
+    });
+  };
+
+  window.copyContent = function() {
+    const el = document.getElementById('secret-content');
+    navigator.clipboard.writeText(el.textContent).then(() => {
+      const btn = document.getElementById('copy-content-btn');
+      const orig = btn.textContent;
+      btn.textContent = 'COPIED';
+      setTimeout(() => btn.textContent = orig, 2000);
+    });
+  };
+
+  // Auto-dismiss flash
+  const flash = document.querySelector('.flash');
   if (flash) {
-    setTimeout(() => {
-      flash.style.transition = 'opacity 0.3s';
-      flash.style.opacity = '0';
-      setTimeout(() => flash.remove(), 300);
-    }, 5000);
+    setTimeout(() => { flash.style.opacity = '0'; flash.style.transition = 'opacity .3s'; setTimeout(() => flash.remove(), 300); }, 5000);
+  }
+
+  // Countdown timer
+  const cd = document.getElementById('countdown');
+  if (cd) {
+    const exp = new Date(cd.dataset.expires).getTime();
+    const tick = () => {
+      const diff = exp - Date.now();
+      if (diff <= 0) { cd.textContent = 'EXPIRED'; return; }
+      const h = Math.floor(diff / 3600000);
+      const m = Math.floor((diff % 3600000) / 60000);
+      const s = Math.floor((diff % 60000) / 1000);
+      cd.textContent = `${h}h ${m}m ${s}s`;
+      requestAnimationFrame(tick);
+    };
+    tick();
   }
 });

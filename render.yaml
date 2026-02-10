@@ -19,15 +19,9 @@ services:
         value: production
       - key: APP_URL
         sync: false
-      - key: STRIPE_SECRET_KEY
+      - key: ADMIN_PASSWORD
         sync: false
-      - key: STRIPE_PUBLISHABLE_KEY
-        sync: false
-      - key: STRIPE_WEBHOOK_SECRET
-        sync: false
-      - key: STRIPE_PRO_PRICE_ID
-        sync: false
-      - key: STRIPE_BUSINESS_PRICE_ID
+      - key: GOOGLE_ADSENSE_ID
         sync: false
 
 databases:
