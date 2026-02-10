@@ -1,14 +1,9 @@
-databases:
-  - name: ghostdrop-db
-    plan: starter
-    databaseName: ghostdrop
-    user: ghostdrop
-
 services:
   - type: web
     name: ghostdrop
     runtime: node
-    plan: starter
+    plan: free
+    region: oregon
     buildCommand: npm install && node scripts/init-db.js
     startCommand: node server.js
     envVars:
@@ -22,6 +17,8 @@ services:
         generateValue: true
       - key: NODE_ENV
         value: production
+      - key: APP_URL
+        sync: false
       - key: STRIPE_SECRET_KEY
         sync: false
       - key: STRIPE_PUBLISHABLE_KEY
@@ -32,3 +29,9 @@ services:
         sync: false
       - key: STRIPE_BUSINESS_PRICE_ID
         sync: false
+
+databases:
+  - name: ghostdrop-db
+    engine: postgresql
+    plan: free
+    region: oregon

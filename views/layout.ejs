@@ -4,10 +4,35 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><%= title %> | <%= appName %></title>
-  <meta name="description" content="Share passwords, API keys, and sensitive messages that self-destruct after being read. End-to-end encrypted.">
+  <meta name="description" content="<%= typeof metaDescription !== 'undefined' && metaDescription ? metaDescription : 'Share passwords, API keys, and sensitive messages that self-destruct after being read. AES-256 encrypted. No trace left behind.' %>">
+  <meta name="keywords" content="<%= typeof metaKeywords !== 'undefined' && metaKeywords ? metaKeywords : 'share password securely, self-destructing messages, encrypted message sharing, one-time secret, burn after reading, secure password sharing' %>">
+  <link rel="canonical" href="<%= appUrl %><%= currentPath %>">
   <meta property="og:title" content="<%= title %> | <%= appName %>">
-  <meta property="og:description" content="Share secrets that self-destruct. Encrypted, ephemeral, gone.">
+  <meta property="og:description" content="<%= typeof metaDescription !== 'undefined' && metaDescription ? metaDescription : 'Share secrets that self-destruct. AES-256 encrypted, ephemeral, gone.' %>">
   <meta property="og:type" content="website">
+  <meta property="og:url" content="<%= appUrl %><%= currentPath %>">
+  <meta property="og:site_name" content="GhostDrop">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="<%= title %> | <%= appName %>">
+  <meta name="twitter:description" content="<%= typeof metaDescription !== 'undefined' && metaDescription ? metaDescription : 'Share secrets that self-destruct. AES-256 encrypted.' %>">
+  <% if (currentPath === '/') { %>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "GhostDrop",
+    "applicationCategory": "SecurityApplication",
+    "operatingSystem": "Web",
+    "description": "Self-destructing encrypted message sharing. Send passwords, API keys, and secrets that vanish after being read.",
+    "offers": [
+      { "@type": "Offer", "price": "0", "priceCurrency": "USD", "name": "Free" },
+      { "@type": "Offer", "price": "8.00", "priceCurrency": "USD", "name": "Pro", "priceSpecification": { "@type": "UnitPriceSpecification", "billingDuration": "P1M" } },
+      { "@type": "Offer", "price": "24.00", "priceCurrency": "USD", "name": "Business", "priceSpecification": { "@type": "UnitPriceSpecification", "billingDuration": "P1M" } }
+    ],
+    "featureList": ["AES-256-GCM Encryption", "Burn After Reading", "Password Protection", "REST API", "Auto-Expiry", "Burn Notifications"]
+  }
+  </script>
+  <% } %>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">

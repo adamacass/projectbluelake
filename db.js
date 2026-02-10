@@ -54,6 +54,13 @@ CREATE TABLE IF NOT EXISTS notifications (
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
+CREATE TABLE IF NOT EXISTS email_subscribers (
+  id SERIAL PRIMARY KEY,
+  email VARCHAR(255) UNIQUE NOT NULL,
+  source VARCHAR(100) DEFAULT 'landing',
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
 CREATE INDEX IF NOT EXISTS idx_drops_slug_hash ON drops(slug_hash);
 CREATE INDEX IF NOT EXISTS idx_drops_user_id ON drops(user_id);
 CREATE INDEX IF NOT EXISTS idx_drops_expires_at ON drops(expires_at);

@@ -1,0 +1,64 @@
+<section class="py-16">
+  <div class="max-w-4xl mx-auto px-4">
+    <div class="text-center">
+      <span class="gd-hero-badge">Use Case</span>
+      <h1 class="text-4xl sm:text-5xl font-extrabold text-white mt-6">Share API Keys Without the Risk</h1>
+      <p class="mt-6 text-lg text-gray-400 max-w-2xl mx-auto">
+        API keys in Slack threads, email chains, and Jira tickets are a breach waiting to happen.
+        GhostDrop gives your team a secure way to share credentials that vanishes after use.
+      </p>
+      <a href="/new" class="gd-btn-primary text-lg px-8 py-4 mt-8 inline-block">Share an API Key Securely &rarr;</a>
+    </div>
+
+    <div class="mt-16">
+      <h2 class="text-2xl font-bold text-white text-center">Why Developers Love GhostDrop</h2>
+      <div class="grid md:grid-cols-2 gap-6 mt-8">
+        <div class="gd-feature">
+          <div class="gd-feature-icon">&#128268;</div>
+          <div>
+            <h3 class="font-semibold text-white text-lg">REST API for Automation</h3>
+            <p class="text-gray-400 mt-1">Create drops programmatically from your CI/CD pipeline, deploy scripts, or internal tools. One curl command.</p>
+          </div>
+        </div>
+        <div class="gd-feature">
+          <div class="gd-feature-icon">&#128274;</div>
+          <div>
+            <h3 class="font-semibold text-white text-lg">AES-256-GCM Encryption</h3>
+            <p class="text-gray-400 mt-1">Keys are encrypted before storage. The decryption key is in the URL only, never in our database.</p>
+          </div>
+        </div>
+        <div class="gd-feature">
+          <div class="gd-feature-icon">&#128163;</div>
+          <div>
+            <h3 class="font-semibold text-white text-lg">Burn After Reading</h3>
+            <p class="text-gray-400 mt-1">API key is permanently destroyed after being viewed. No copies, no cache.</p>
+          </div>
+        </div>
+        <div class="gd-feature">
+          <div class="gd-feature-icon">&#128276;</div>
+          <div>
+            <h3 class="font-semibold text-white text-lg">View Notifications</h3>
+            <p class="text-gray-400 mt-1">Get notified in your dashboard when the key was accessed. Know the moment it was read.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-16 gd-card">
+      <h2 class="text-xl font-bold text-white">Quick Example: Share via CLI</h2>
+      <pre class="gd-code mt-4"><code># Create a self-destructing drop with your API key
+curl -X POST https://your-ghostdrop.com/api/drops \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"content": "sk_live_abc123xyz", "expiry_hours": 1, "max_views": 1}'
+
+# Response: {"url": "https://your-ghostdrop.com/d/aBcDeFgH..."}</code></pre>
+      <p class="text-gray-400 mt-3">Send the URL to your teammate. One view, then it's gone forever.</p>
+    </div>
+
+    <div class="mt-16 text-center">
+      <a href="/new" class="gd-btn-primary px-8 py-4">Share an API Key Now</a>
+      <p class="text-sm text-gray-500 mt-3">Free. No account needed.</p>
+    </div>
+  </div>
+</section>

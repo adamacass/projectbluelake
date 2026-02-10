@@ -87,6 +87,8 @@ app.use(globalLimiter);
 
 // Routes
 app.use('/', require('./routes/index'));
+app.use('/', require('./routes/sitemap'));
+app.use('/', require('./routes/landing-pages'));
 app.use('/', require('./routes/drops'));
 app.use('/', require('./routes/auth'));
 app.use('/dashboard', require('./routes/dashboard'));
