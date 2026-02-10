@@ -12,6 +12,10 @@ router.get('/pricing', (req, res) => {
   res.render('pricing', { title: 'Pricing' });
 });
 
+router.get('/security', (req, res) => {
+  res.render('security', { title: 'Security' });
+});
+
 router.get('/api-docs', (req, res) => {
   res.render('api-docs', { title: 'API Documentation' });
 });

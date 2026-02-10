@@ -21,10 +21,12 @@ app.use(helmet({
     directives: {
       defaultSrc: ["'self'"],
       styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+      styleSrcElem: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
       fontSrc: ["'self'", "https://fonts.gstatic.com"],
       scriptSrc: ["'self'", "'unsafe-inline'", "https://pagead2.googlesyndication.com", "https://www.googletagservices.com"],
       frameSrc: ["https://googleads.g.doubleclick.net", "https://pagead2.googlesyndication.com"],
       imgSrc: ["'self'", "data:", "https://pagead2.googlesyndication.com"],
+      connectSrc: ["'self'", "https://pagead2.googlesyndication.com"],
     },
   },
 }));

@@ -1,6 +1,6 @@
 <div class="auth-wrap">
   <h2 style="font-size:1.5rem">Create account</h2>
-  <p style="color:var(--dim);font-size:.85rem;margin-top:.25rem">Track your drops. Get burn notifications.</p>
+  <p style="color:var(--dim);font-size:.85rem;margin-top:.25rem">Track drops. Get notified when they're read.</p>
   <% if (error) { %><div class="flash flash-error" style="margin:1rem 0"><%= error %></div><% } %>
   <form method="POST" action="/register" style="margin-top:1.5rem">
     <div class="fg"><label class="fl" for="email">Email</label><input type="email" name="email" id="email" class="fi" required autofocus placeholder="you@example.com"></div>

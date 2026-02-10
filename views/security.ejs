@@ -1,0 +1,110 @@
+<div class="section" style="padding-top:5rem;max-width:700px">
+  <div class="section-tag">// security</div>
+  <h1 style="font-size:2.25rem">How your data is protected</h1>
+  <p style="color:var(--dim);margin-top:1rem;line-height:1.7">
+    We built GhostDrop so that even we can't read your secrets. This page explains exactly how that works.
+    If something here doesn't make sense, that's a bug in our explanation, not a feature.
+  </p>
+
+  <div style="margin-top:3rem">
+    <h2>Encryption</h2>
+    <p style="color:var(--dim);margin-top:.75rem;line-height:1.7">
+      Every drop is encrypted with <strong style="color:var(--text)">AES-256-GCM</strong> before it's written to the database.
+      The encryption key is derived from a random slug using PBKDF2 (100,000 iterations, SHA-256).
+      The slug itself is never stored &mdash; only a SHA-256 hash of it, used for lookups.
+    </p>
+  </div>
+
+  <div style="margin-top:2.5rem">
+    <h2>What we store vs. what we don't</h2>
+    <div style="margin-top:1.25rem;display:grid;grid-template-columns:1fr 1fr;gap:1px;border:1px solid var(--border);background:var(--border)">
+      <div style="background:var(--bg);padding:1.25rem">
+        <div style="font-family:var(--mono);font-size:.65rem;color:var(--green);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.75rem">Stored in our database</div>
+        <ul style="list-style:none;color:var(--dim);font-size:.85rem;line-height:2">
+          <li>SHA-256 hash of the slug (for lookup)</li>
+          <li>Encrypted ciphertext (unreadable without key)</li>
+          <li>IV and auth tag (needed for decryption)</li>
+          <li>Metadata: view count, expiry, password hash</li>
+        </ul>
+      </div>
+      <div style="background:var(--bg);padding:1.25rem">
+        <div style="font-family:var(--mono);font-size:.65rem;color:var(--red);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.75rem">Never stored anywhere</div>
+        <ul style="list-style:none;color:var(--dim);font-size:.85rem;line-height:2">
+          <li>The raw slug (exists only in the URL)</li>
+          <li>The decryption key (derived at read time)</li>
+          <li>The plaintext content</li>
+          <li>Server-side logs of content</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:2.5rem">
+    <h2>The encryption flow</h2>
+    <div style="margin-top:1.25rem;border:1px solid var(--border);padding:1.5rem;font-family:var(--mono);font-size:.78rem;color:var(--dim);line-height:2.2">
+      <div><span style="color:var(--muted)">1.</span> <span style="color:var(--text)">slug</span> = random 22-char string (URL-safe base64)</div>
+      <div><span style="color:var(--muted)">2.</span> <span style="color:var(--text)">slugHash</span> = SHA-256(<span style="color:var(--text)">slug</span>) <span style="color:var(--muted)">&rarr; stored for lookup</span></div>
+      <div><span style="color:var(--muted)">3.</span> <span style="color:var(--text)">key</span> = PBKDF2(<span style="color:var(--text)">slug</span>, ENCRYPTION_SECRET, 100k iterations)</div>
+      <div><span style="color:var(--muted)">4.</span> <span style="color:var(--text)">iv</span> = random 12 bytes</div>
+      <div><span style="color:var(--muted)">5.</span> <span style="color:var(--text)">ciphertext</span>, <span style="color:var(--text)">authTag</span> = AES-256-GCM.encrypt(<span style="color:var(--text)">plaintext</span>, <span style="color:var(--text)">key</span>, <span style="color:var(--text)">iv</span>)</div>
+      <div><span style="color:var(--muted)">6.</span> Store: <span style="color:var(--text)">slugHash</span>, <span style="color:var(--text)">ciphertext</span>, <span style="color:var(--text)">iv</span>, <span style="color:var(--text)">authTag</span></div>
+      <div><span style="color:var(--muted)">7.</span> Return URL: /d/<span style="color:var(--lime)">slug</span> <span style="color:var(--muted)">&rarr; slug is only in the URL, never stored</span></div>
+    </div>
+  </div>
+
+  <div style="margin-top:2.5rem">
+    <h2>On read</h2>
+    <p style="color:var(--dim);margin-top:.75rem;line-height:1.7">
+      When someone opens the link, we hash the slug from the URL, look up the record, re-derive the key,
+      decrypt the content, serve it, then either increment the view counter or permanently delete the record.
+      The plaintext exists in server memory for the duration of that single request. It's never written to disk or logged.
+    </p>
+  </div>
+
+  <div style="margin-top:2.5rem">
+    <h2>Password protection</h2>
+    <p style="color:var(--dim);margin-top:.75rem;line-height:1.7">
+      If you set a password on a drop, the viewer must enter it before decryption happens.
+      The password is hashed with bcrypt (cost factor 10) and compared server-side. Wrong password = no decryption attempt.
+      This gives you a second channel: share the link in Slack, send the password via text. Neither is useful alone.
+    </p>
+  </div>
+
+  <div style="margin-top:2.5rem">
+    <h2>What a database breach reveals</h2>
+    <p style="color:var(--dim);margin-top:.75rem;line-height:1.7">
+      If someone dumped our entire database tomorrow, they'd get: encrypted blobs, slug hashes (not slugs),
+      IVs, and auth tags. Without the original slugs (which only existed in URLs we never stored), the
+      encryption keys can't be re-derived. The ciphertext is computationally useless.
+    </p>
+  </div>
+
+  <div style="margin-top:2.5rem">
+    <h2>What we don't do</h2>
+    <div style="margin-top:.75rem;color:var(--dim);font-size:.9rem;line-height:1.8">
+      <div>We don't read your drops. We architecturally <em>can't</em>.</div>
+      <div>We don't log plaintext content.</div>
+      <div>We don't sell data. There are no analytics trackers on the view page.</div>
+      <div>We don't store IPs in plaintext &mdash; they're hashed if recorded at all.</div>
+      <div>We have never received a legal request for user data.</div>
+    </div>
+  </div>
+
+  <div style="margin-top:2.5rem">
+    <h2>Limitations</h2>
+    <p style="color:var(--dim);margin-top:.75rem;line-height:1.7">
+      This is not end-to-end encrypted in the Signal sense. Decryption happens on our server, not in your browser.
+      That means you're trusting that our server code does what we say it does. We plan to open-source the codebase
+      so you can verify.
+    </p>
+    <p style="color:var(--dim);margin-top:.75rem;line-height:1.7">
+      If your threat model requires client-side-only decryption, GhostDrop isn't the right tool.
+      For sharing passwords with coworkers who would otherwise paste them in Slack, it's a meaningful improvement.
+    </p>
+  </div>
+
+  <div style="margin-top:3rem;padding:1.5rem;border:1px solid var(--border);text-align:center">
+    <p style="color:var(--dim);font-size:.85rem">Questions about our security model?</p>
+    <p style="color:var(--muted);font-size:.78rem;margin-top:.35rem">Reach out and we'll answer publicly. Transparency is the point.</p>
+  </div>
+</div>

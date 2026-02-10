@@ -1,7 +1,7 @@
 <div class="created-wrap">
   <div class="codename">// Operation: <%= codename %></div>
-  <h2 style="margin-top:.5rem;font-size:1.5rem">Drop encrypted.</h2>
-  <p style="color:var(--dim);font-size:.9rem;margin-top:.35rem">Share this link. It self-destructs after <strong style="color:var(--text)"><%= maxViews %></strong> view<%= maxViews !== 1 ? 's' : '' %>.</p>
+  <h2 style="margin-top:.5rem;font-size:1.5rem">Link ready.</h2>
+  <p style="color:var(--dim);font-size:.85rem;margin-top:.35rem">Dies after <strong style="color:var(--text)"><%= maxViews %></strong> view<%= maxViews !== 1 ? 's' : '' %>.</p>
 
   <div class="url-box" style="margin-top:1.25rem">
     <input type="text" value="<%= dropUrl %>" readonly id="drop-url">
@@ -22,7 +22,7 @@
   </div>
   <% } %>
 
-  <div class="warn-box">Save this link now. You won't see it again. Once the recipient opens it, the content is permanently destroyed.</div>
+  <div class="warn-box">Save this link now. You won't see it again.</div>
 
   <div style="margin-top:1.5rem;display:flex;gap:.75rem">
     <a href="/new" class="btn btn-outline btn-sm">Another drop</a>

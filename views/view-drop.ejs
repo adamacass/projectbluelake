@@ -11,15 +11,15 @@
   </div>
 
   <% if (willDestroy) { %>
-    <div class="reveal-destroyed" id="notice" style="display:none"><strong>Permanently destroyed.</strong> This content is shown for the last time. Refreshing will not show it again.</div>
+    <div class="reveal-destroyed" id="notice" style="display:none">This drop is now destroyed. Refreshing won't bring it back.</div>
   <% } else { %>
-    <div class="reveal-remaining" id="notice" style="display:none"><strong><%= viewsRemaining %></strong> view<%= viewsRemaining !== 1 ? 's' : '' %> remaining before destruction.</div>
+    <div class="reveal-remaining" id="notice" style="display:none"><strong><%= viewsRemaining %></strong> view<%= viewsRemaining !== 1 ? 's' : '' %> left.</div>
   <% } %>
 
   <div class="viral-cta" id="cta" style="display:none">
-    <p>Sent securely with <span class="brand">ghostdrop</span></p>
-    <p style="font-size:.75rem;margin-top:.25rem">Self-destructing encrypted messages. Free.</p>
-    <a href="/new" class="btn btn-lime btn-sm" style="margin-top:.75rem">Send your own secret</a>
+    <p>Sent with <span class="brand">ghostdrop</span></p>
+    <p style="font-size:.75rem;margin-top:.25rem">Encrypted messages that self-destruct. Free.</p>
+    <a href="/" class="btn btn-lime btn-sm" style="margin-top:.75rem">Send your own</a>
   </div>
 </div>
 

@@ -1,12 +1,12 @@
 <div class="section" style="max-width:600px;margin:0 auto">
   <div class="section-tag">// new drop</div>
   <h2>Drop a secret</h2>
-  <p style="color:var(--dim);font-size:.9rem;margin-bottom:2rem">Encrypted on creation. Destroyed after viewing.</p>
+  <p style="color:var(--dim);font-size:.85rem;margin-bottom:2rem">Encrypted. Shared. Destroyed.</p>
 
   <form method="POST" action="/new" id="create-form">
     <div class="fg">
       <label class="fl" for="content">Secret content</label>
-      <textarea name="content" id="content" rows="8" class="ft" placeholder="Paste your password, API key, or secret here..." required maxlength="500000"></textarea>
+      <textarea name="content" id="content" rows="8" class="ft" placeholder="Paste a password, API key, credentials..." required maxlength="500000"></textarea>
       <div style="display:flex;justify-content:space-between;margin-top:.3rem"><span class="fhint">AES-256-GCM encrypted</span><span class="fhint" id="char-count">0</span></div>
     </div>
 
@@ -34,14 +34,14 @@
 
     <div class="fg">
       <label class="fl" for="password">Password (optional)</label>
-      <input type="text" name="password" id="password" class="fi" placeholder="Add a password for extra security">
+      <input type="text" name="password" id="password" class="fi" placeholder="Adds a second factor">
     </div>
 
     <% if (user) { %>
     <div class="fr">
       <div class="fg">
         <label class="fl" for="label">Label (private)</label>
-        <input type="text" name="label" id="label" class="fi" placeholder="e.g. DB creds for John" maxlength="255">
+        <input type="text" name="label" id="label" class="fi" placeholder="e.g. staging DB creds" maxlength="255">
       </div>
       <div class="fg" style="display:flex;align-items:flex-end;padding-bottom:1.25rem">
         <label class="fcheck"><input type="checkbox" name="notify"> Notify me when viewed</label>
@@ -49,8 +49,8 @@
     </div>
     <% } %>
 
-    <button type="submit" class="btn btn-lime btn-full" style="margin-top:.5rem">Encrypt &amp; create drop</button>
+    <button type="submit" class="btn btn-lime btn-full" style="margin-top:.5rem">Encrypt &amp; create link</button>
   </form>
 
-  <% if (!user) { %><p style="text-align:center;font-size:.8rem;color:var(--muted);margin-top:1.5rem"><a href="/register">Create an account</a> to track drops and get burn notifications.</p><% } %>
+  <% if (!user) { %><p style="text-align:center;font-size:.78rem;color:var(--muted);margin-top:1.5rem"><a href="/register">Sign up</a> to track drops and get burn notifications.</p><% } %>
 </div>

@@ -4,16 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><%= title %> | <%= appName %></title>
-  <meta name="description" content="<%= typeof metaDescription !== 'undefined' && metaDescription ? metaDescription : 'Self-destructing encrypted messages. Share passwords and secrets that vanish after being read.' %>">
+  <meta name="description" content="<%= typeof metaDescription !== 'undefined' && metaDescription ? metaDescription : 'Encrypted, self-destructing messages. Share passwords without leaving a trail.' %>">
   <link rel="canonical" href="<%= appUrl %><%= currentPath %>">
   <meta property="og:title" content="<%= title %> | GhostDrop">
-  <meta property="og:description" content="Self-destructing encrypted messages. Share passwords and secrets that vanish after being read.">
+  <meta property="og:description" content="Encrypted, self-destructing messages. Share passwords without leaving a trail.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="<%= appUrl %><%= currentPath %>">
   <meta name="twitter:card" content="summary">
   <% if (currentPath === '/') { %>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"GhostDrop","applicationCategory":"SecurityApplication","operatingSystem":"Web","description":"Self-destructing encrypted message sharing.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"GhostDrop","applicationCategory":"SecurityApplication","operatingSystem":"Web","description":"Encrypted, self-destructing message sharing.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
   <% } %>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/custom.css">
   <% if (adsenseId) { %><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=<%= adsenseId %>" crossorigin="anonymous"></script><% } %>
 </head>
@@ -23,6 +26,7 @@
       <a href="/" class="nav-logo">ghost<span>drop</span></a>
       <div class="nav-links">
         <a href="/new">drop</a>
+        <a href="/security" class="hm">security</a>
         <a href="/api-docs" class="hm">api</a>
         <% if (user) { %>
           <a href="/dashboard">dash<% if (notifications.length > 0) { %><span class="nav-badge"><%= notifications.length %></span><% } %></a>
@@ -42,10 +46,10 @@
 
   <footer class="footer">
     <div class="footer-inner">
-      <span class="footer-text">ghost<span style="color:#baff39">drop</span> &mdash; secrets that don't survive</span>
+      <span class="footer-text">ghost<span style="color:#baff39">drop</span></span>
       <div class="footer-links">
+        <a href="/security">security</a>
         <a href="/api-docs">api</a>
-        <a href="/use-cases/share-passwords-securely">use cases</a>
       </div>
     </div>
   </footer>
