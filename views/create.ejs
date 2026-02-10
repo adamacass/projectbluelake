@@ -1,7 +1,7 @@
 <div class="section" style="max-width:600px;margin:0 auto">
-  <div class="section-tag">// new drop</div>
-  <h2>Drop a secret</h2>
-  <p style="color:var(--dim);font-size:.85rem;margin-bottom:2rem">Encrypted. Shared. Destroyed.</p>
+  <div class="section-tag">// new note</div>
+  <h2>Send a secret</h2>
+  <p style="color:var(--dim);font-size:.85rem;margin-bottom:2rem">Encrypted, shared, then burned</p>
 
   <form method="POST" action="/new" id="create-form">
     <div class="fg">
@@ -52,5 +52,5 @@
     <button type="submit" class="btn btn-lime btn-full" style="margin-top:.5rem">Encrypt &amp; create link</button>
   </form>
 
-  <% if (!user) { %><p style="text-align:center;font-size:.78rem;color:var(--muted);margin-top:1.5rem"><a href="/register">Sign up</a> to track drops and get burn notifications.</p><% } %>
+  <% if (!user) { %><p style="text-align:center;font-size:.78rem;color:var(--muted);margin-top:1.5rem"><a href="/register">Sign up</a> to track your notes and get notified when they're read.</p><% } %>
 </div>

@@ -1,11 +1,11 @@
 <div class="created-wrap">
   <div class="codename">// Operation: <%= codename %></div>
-  <h2 style="margin-top:.5rem;font-size:1.5rem">Link ready.</h2>
-  <p style="color:var(--dim);font-size:.85rem;margin-top:.35rem">Dies after <strong style="color:var(--text)"><%= maxViews %></strong> view<%= maxViews !== 1 ? 's' : '' %>.</p>
+  <h2 style="margin-top:.5rem;font-size:1.5rem">🔥 Link ready</h2>
+  <p style="color:var(--dim);font-size:.85rem;margin-top:.35rem">Burns after <strong style="color:var(--text)"><%= maxViews %></strong> view<%= maxViews !== 1 ? 's' : '' %></p>
 
-  <div class="url-box" style="margin-top:1.25rem">
+  <div class="url-box" style="margin-top:1.25rem" id="url-box">
     <input type="text" value="<%= dropUrl %>" readonly id="drop-url">
-    <button onclick="copyUrl()" id="copy-btn">COPY</button>
+    <button onclick="copyUrl()" id="copy-btn" class="fire-glow">COPY</button>
   </div>
 
   <div class="meta-row">
@@ -25,9 +25,18 @@
   <div class="warn-box">Save this link now. You won't see it again.</div>
 
   <div style="margin-top:1.5rem;display:flex;gap:.75rem">
-    <a href="/new" class="btn btn-outline btn-sm">Another drop</a>
+    <a href="/new" class="btn btn-outline btn-sm">Send another</a>
     <% if (user) { %><a href="/dashboard" class="btn btn-outline btn-sm">Dashboard</a><% } %>
   </div>
 </div>
 
 <% if (adsenseId) { %><div class="ad-slot"><ins class="adsbygoogle" style="display:block" data-ad-client="<%= adsenseId %>" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div><% } %>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var urlBox = document.getElementById('url-box');
+  if (urlBox && window.triggerFireBurst) {
+    window.triggerFireBurst(urlBox);
+  }
+});
+</script>

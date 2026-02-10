@@ -10,23 +10,23 @@
 ---
 
 ## Product Name
-GhostDrop
+NoteFlame
 
 ## Tagline (60 chars max)
 Share secrets that self-destruct after being read
 
 ## Description (260 chars max)
-GhostDrop lets you share passwords, API keys, and sensitive messages via encrypted, self-destructing links. AES-256-GCM encrypted. Burns after reading. No trace left behind. Free to use, Pro plans for teams.
+NoteFlame lets you share passwords, API keys, and sensitive messages via encrypted, self-destructing links. AES-256-GCM encrypted. Burns after reading. No trace left behind. Free to use, Pro plans for teams.
 
 ## Longer Description / First Comment
 
 Hey Product Hunt! 👋
 
-I built GhostDrop because I was tired of seeing API keys and passwords pasted into Slack channels where they sit forever.
+I built NoteFlame because I was tired of seeing API keys and passwords pasted into Slack channels where they sit forever.
 
 **The problem:** Every time you share a password over Slack, email, or text, it creates a permanent record. Anyone with channel access can search and find it. Compliance auditors hate it. Security teams cringe.
 
-**The solution:** GhostDrop creates encrypted, self-destructing links. Paste your secret, get a link, share it. After the recipient reads it, it's permanently destroyed. Zero trace.
+**The solution:** NoteFlame creates encrypted, self-destructing links. Paste your secret, get a link, share it. After the recipient reads it, it's permanently destroyed. Zero trace.
 
 **What makes it different:**
 - 🔐 AES-256-GCM encryption (the key never touches our database)
@@ -48,13 +48,13 @@ I'd love your feedback! What features would make this more useful for your team?
 - Open Source
 
 ## Thumbnail/Logo
-Use a dark purple/black theme with a ghost icon and the text "GhostDrop"
+Use a dark purple/black theme with a ghost icon and the text "NoteFlame"
 
 ## Maker Comment (post this as your first comment)
 Hey everyone! Maker here.
 
 I built this after watching my team paste database credentials into a Slack channel for the 100th time. We tried PrivNote but it felt outdated and we needed API access for our deployment scripts.
 
-GhostDrop is fully open source and self-hostable. The encryption model is designed so that even if the database is compromised, the encrypted content can't be decrypted (the key only exists in the URL, which we never store).
+NoteFlame is fully open source and self-hostable. The encryption model is designed so that even if the database is compromised, the encrypted content can't be decrypted (the key only exists in the URL, which we never store).
 
 Happy to answer any questions about the security model, tech stack, or business model!

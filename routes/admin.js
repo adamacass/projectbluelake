@@ -137,7 +137,7 @@ router.get('/export/subscribers', requireAdmin, async (req, res) => {
       csv += `${r.email},${r.source},${r.created_at.toISOString()}\n`;
     });
     res.setHeader('Content-Type', 'text/csv');
-    res.setHeader('Content-Disposition', 'attachment; filename=ghostdrop-subscribers.csv');
+    res.setHeader('Content-Disposition', 'attachment; filename=noteflame-subscribers.csv');
     res.send(csv);
   } catch (err) {
     console.error('[Admin] Export error:', err);

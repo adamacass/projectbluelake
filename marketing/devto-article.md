@@ -8,7 +8,7 @@ tags: javascript, security, webdev, opensource
 
 Every engineering team has this problem: someone pastes a database password into a Slack channel, and it sits there forever. Searchable, visible to anyone who joins later, a compliance nightmare.
 
-I built **GhostDrop** to fix this: encrypted, self-destructing messages that vanish after being read.
+I built **NoteFlame** to fix this: encrypted, self-destructing messages that vanish after being read.
 
 ## The Encryption Model
 

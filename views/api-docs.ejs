@@ -2,7 +2,7 @@
   <div class="section-tag">// api reference</div>
   <h1 style="font-size:2.5rem">API Documentation</h1>
   <p style="color:var(--dim);max-width:550px;margin-top:1rem;line-height:1.7">
-    Integrate GhostDrop into your apps and workflows. Create and retrieve self-destructing drops programmatically.
+    Integrate NoteFlame into your apps and workflows. Create and retrieve self-destructing drops programmatically.
   </p>
 
   <!-- Authentication -->
@@ -33,7 +33,7 @@ curl -H "Authorization: Bearer YOUR_TOKEN" ...</code></pre>
 }</code></pre>
     <h3 style="font-size:1rem;color:var(--dim);margin-top:1.5rem;font-weight:600">Response</h3>
     <pre style="background:var(--bg2);border:1px solid var(--border);padding:1.25rem;margin-top:.75rem;overflow-x:auto"><code style="font-family:var(--mono);font-size:.8rem;color:var(--green);line-height:1.7">{
-  "url": "https://ghostdrop.app/d/aBcDeFgHiJkLmNoPqRsTuV",
+  "url": "https://noteflame.app/d/aBcDeFgHiJkLmNoPqRsTuV",
   "slug": "aBcDeFgHiJkLmNoPqRsTuV",
   "expires_at": "2025-01-16T12:00:00.000Z",
   "max_views": 1,
@@ -49,7 +49,7 @@ curl -H "Authorization: Bearer YOUR_TOKEN" ...</code></pre>
       <code style="font-family:var(--mono);font-size:.85rem;color:var(--text)">/api/drops/:slug</code>
     </div>
     <p style="color:var(--dim);margin-top:.75rem">No authentication required. For password-protected drops, pass <code style="font-family:var(--mono);color:var(--lime)">?password=yourpassword</code>.</p>
-    <pre style="background:var(--bg2);border:1px solid var(--border);padding:1.25rem;margin-top:1rem;overflow-x:auto"><code style="font-family:var(--mono);font-size:.8rem;color:var(--green);line-height:1.7">curl https://ghostdrop.app/api/drops/aBcDeFgHiJkLmNoPqRsTuV</code></pre>
+    <pre style="background:var(--bg2);border:1px solid var(--border);padding:1.25rem;margin-top:1rem;overflow-x:auto"><code style="font-family:var(--mono);font-size:.8rem;color:var(--green);line-height:1.7">curl https://noteflame.app/api/drops/aBcDeFgHiJkLmNoPqRsTuV</code></pre>
     <h3 style="font-size:1rem;color:var(--dim);margin-top:1.5rem;font-weight:600">Response</h3>
     <pre style="background:var(--bg2);border:1px solid var(--border);padding:1.25rem;margin-top:.75rem;overflow-x:auto"><code style="font-family:var(--mono);font-size:.8rem;color:var(--green);line-height:1.7">{
   "content": "my-secret-api-key-12345",

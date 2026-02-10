@@ -12,7 +12,7 @@ I built a tool that solves a problem every dev team has:
 
 Passwords pasted in Slack that sit there forever.
 
-Introducing GhostDrop - self-destructing encrypted messages.
+Introducing NoteFlame - self-destructing encrypted messages.
 
 Here's how it works (thread) ↓
 
@@ -28,7 +28,7 @@ Every time you share a password over Slack, email, or text → it creates a perm
 ## Tweet 3
 The solution:
 
-1. Paste your secret into GhostDrop
+1. Paste your secret into NoteFlame
 2. Get an encrypted one-time link
 3. Share the link (not the secret)
 4. Recipient reads it → it's permanently destroyed
@@ -80,7 +80,7 @@ If you share passwords or API keys with your team, you need this.
 ### Tweet A
 Stop pasting passwords in Slack.
 
-Use GhostDrop instead → encrypted self-destructing links.
+Use NoteFlame instead → encrypted self-destructing links.
 
 One view, then it's gone forever.
 
@@ -100,7 +100,7 @@ Or... share it via a self-destructing link that vanishes after reading.
 ### Tweet C
 If your team shares credentials over Slack, you have a security problem.
 
-GhostDrop: paste the secret, get an encrypted link, share the link. After they read it, it's permanently destroyed.
+NoteFlame: paste the secret, get an encrypted link, share the link. After they read it, it's permanently destroyed.
 
 AES-256-GCM. Open source. Free.
 
@@ -109,6 +109,6 @@ New employees need 10+ passwords on day 1.
 
 Most companies put them in a "Welcome!" email that lives forever.
 
-Better: send a self-destructing GhostDrop link. They read it, save to their password manager, link self-destructs.
+Better: send a self-destructing NoteFlame link. They read it, save to their password manager, link self-destructs.
 
 [YOUR_URL]

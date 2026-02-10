@@ -1,4 +1,4 @@
-# GhostDrop Marketing Plan & Budget
+# NoteFlame Marketing Plan & Budget
 
 ## Goal: $1,000 MRR in 90 Days
 
@@ -104,7 +104,7 @@ The SEO landing pages are already built into the app. Now optimize and build bac
 ### Community Engagement
 - [ ] Join relevant Slack communities (DevOps, SRE, IT)
 - [ ] Join Discord servers (dev communities, startup communities)
-- [ ] Answer questions naturally and mention GhostDrop when relevant
+- [ ] Answer questions naturally and mention NoteFlame when relevant
 - [ ] Post in IndieHackers community
 - **Cost: $0**
 
@@ -160,7 +160,7 @@ Only start paid ads AFTER validating with free channels.
 - [ ] Publish weekly blog content
 
 ### Referral Program (Free - Already Built In)
-- Every drop created shows GhostDrop branding to the recipient
+- Every drop created shows NoteFlame branding to the recipient
 - Every "destroyed" page has a CTA to create your own drop
 - This is the core viral loop: sender → recipient → new sender
 

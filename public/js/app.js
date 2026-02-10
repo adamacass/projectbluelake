@@ -74,4 +74,73 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     tick();
   }
+
+  // ─── FIRE EFFECTS ───
+
+  /**
+   * Starts a fire-timer countdown bar attached to an element.
+   * When it reaches 0, triggers fire-destroy on the parent content area.
+   * @param {HTMLElement} element - The element to attach the timer bar to
+   * @param {number} durationMs - Duration in milliseconds
+   */
+  window.startBurnTimer = function(element, durationMs) {
+    if (!element) return;
+
+    const bar = document.createElement('div');
+    bar.className = 'fire-timer';
+    bar.style.width = '100%';
+    bar.style.transition = 'none';
+    element.appendChild(bar);
+
+    // Force reflow so the browser registers the initial width
+    bar.offsetWidth;
+
+    // Set the transition to match the duration and shrink to 0
+    bar.style.transition = 'width ' + durationMs + 'ms linear';
+    bar.style.width = '0%';
+
+    // When the timer completes, trigger burn on the parent content area
+    setTimeout(function() {
+      var contentArea = element.closest('.reveal-wrap')
+        ? element.closest('.reveal-wrap').querySelector('.reveal-content, #content-card')
+        : element.parentElement;
+      if (contentArea) {
+        window.triggerBurn(contentArea);
+      }
+    }, durationMs);
+  };
+
+  /**
+   * Manually triggers the fire-destroy animation on an element.
+   * After the animation completes, replaces content with "Burned" text.
+   * @param {HTMLElement} element - The element to burn
+   */
+  window.triggerBurn = function(element) {
+    if (!element || element.classList.contains('fire-destroy')) return;
+
+    element.classList.remove('fire-reveal');
+    element.classList.add('fire-destroy');
+
+    element.addEventListener('animationend', function handler() {
+      element.removeEventListener('animationend', handler);
+      element.className = 'fire-burned';
+      element.style = '';
+      element.innerHTML = '\uD83D\uDD25 Burned';
+    }, { once: true });
+  };
+
+  /**
+   * Adds fire-burst class to an element, removes it after animation ends.
+   * @param {HTMLElement} element - The element to apply the burst to
+   */
+  window.triggerFireBurst = function(element) {
+    if (!element) return;
+
+    element.classList.add('fire-burst');
+
+    element.addEventListener('animationend', function handler() {
+      element.removeEventListener('animationend', handler);
+      element.classList.remove('fire-burst');
+    }, { once: true });
+  };
 });

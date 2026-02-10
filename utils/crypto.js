@@ -3,7 +3,7 @@ const crypto = require('crypto');
 const ALGORITHM = 'aes-256-gcm';
 const IV_LENGTH = 16;
 const KEY_LENGTH = 32;
-const SALT = 'ghostdrop-key-derivation';
+const SALT = 'noteflame-key-derivation';
 
 function deriveKey(slug) {
   const secret = process.env.ENCRYPTION_SECRET || 'default-dev-secret-change-me';

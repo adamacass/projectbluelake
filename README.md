@@ -1,4 +1,4 @@
-# GhostDrop
+# NoteFlame
 
 **Share secrets that self-destruct.** Encrypted, ephemeral message sharing.
 
@@ -67,13 +67,13 @@ After the Blueprint deploys, go to your web service → Environment and add:
 ### 2. Create Products
 In Stripe Dashboard → Products → Add Product:
 
-**Product 1: GhostDrop Pro**
-- Name: `GhostDrop Pro`
+**Product 1: NoteFlame Pro**
+- Name: `NoteFlame Pro`
 - Price: `$8.00/month` (recurring)
 - Copy the **Price ID** (starts with `price_`) → use as `STRIPE_PRO_PRICE_ID`
 
-**Product 2: GhostDrop Business**
-- Name: `GhostDrop Business`
+**Product 2: NoteFlame Business**
+- Name: `NoteFlame Business`
 - Price: `$24.00/month` (recurring)
 - Copy the **Price ID** → use as `STRIPE_BUSINESS_PRICE_ID`
 
@@ -104,7 +104,7 @@ In Stripe Dashboard → Products → Add Product:
 ```bash
 # Clone the repo
 git clone <your-repo-url>
-cd ghostdrop
+cd noteflame
 
 # Install dependencies
 npm install

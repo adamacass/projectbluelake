@@ -6,10 +6,10 @@ Post these on different days, not all at once. Space them 3-5 days apart.
 
 ## Post 1: r/SideProject
 
-**Title:** I built a self-destructing message app for sharing passwords securely - GhostDrop
+**Title:** I built a self-destructing message app for sharing passwords securely - NoteFlame
 
 **Body:**
-I got tired of seeing API keys and passwords pasted in Slack channels, so I built GhostDrop - a tool that lets you share secrets via encrypted, self-destructing links.
+I got tired of seeing API keys and passwords pasted in Slack channels, so I built NoteFlame - a tool that lets you share secrets via encrypted, self-destructing links.
 
 **How it works:**
 1. Paste your secret (password, API key, whatever)
@@ -38,7 +38,7 @@ Would love feedback on the product and pricing!
 **Title:** Built a full-stack SaaS in Node.js: self-destructing encrypted messages with AES-256-GCM
 
 **Body:**
-Sharing the architecture of a SaaS I just shipped. It's a self-destructing message platform (think PrivNote but modern) called GhostDrop.
+Sharing the architecture of a SaaS I just shipped. It's a self-destructing message platform (think PrivNote but modern) called NoteFlame.
 
 **Interesting technical decisions:**
 
@@ -58,10 +58,10 @@ Happy to answer questions about the implementation!
 
 ## Post 3: r/selfhosted
 
-**Title:** GhostDrop - self-hostable encrypted message sharing (self-destructing secrets)
+**Title:** NoteFlame - self-hostable encrypted message sharing (self-destructing secrets)
 
 **Body:**
-Just open-sourced GhostDrop, a self-destructing encrypted message sharing platform. Think PrivNote but you own your data.
+Just open-sourced NoteFlame, a self-destructing encrypted message sharing platform. Think PrivNote but you own your data.
 
 **Features:**
 - AES-256-GCM encryption (key never stored in DB)
@@ -90,7 +90,7 @@ Repo is open source. Feedback welcome!
 **Title:** Launched a micro-SaaS for secure password sharing - targeting $1K MRR
 
 **Body:**
-Just launched GhostDrop - a platform for sharing passwords and sensitive info via self-destructing encrypted links.
+Just launched NoteFlame - a platform for sharing passwords and sensitive info via self-destructing encrypted links.
 
 **The problem I'm solving:**
 Every company shares passwords, API keys, and credentials over Slack, email, and text. This creates permanent, searchable records of sensitive information. It's a security nightmare and a compliance violation.

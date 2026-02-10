@@ -17,6 +17,8 @@ const PORT = process.env.PORT || 3000;
 app.set('trust proxy', 1);
 
 app.use(helmet({
+  crossOriginEmbedderPolicy: false,
+  crossOriginResourcePolicy: { policy: 'cross-origin' },
   contentSecurityPolicy: {
     directives: {
       defaultSrc: ["'self'"],
@@ -35,7 +37,7 @@ app.use(express.json({ limit: '5mb' }));
 app.use(express.urlencoded({ extended: true, limit: '5mb' }));
 
 app.use(cookieSession({
-  name: 'gd_session',
+  name: 'nf_session',
   keys: [process.env.SESSION_SECRET || 'dev-secret-change-me'],
   maxAge: 30 * 24 * 60 * 60 * 1000,
   sameSite: 'lax',
@@ -59,7 +61,7 @@ app.set('layout', 'layout');
 app.use(express.static(path.join(__dirname, 'public'), { maxAge: '7d' }));
 
 app.use((req, res, next) => {
-  res.locals.appName = 'GhostDrop';
+  res.locals.appName = 'NoteFlame';
   res.locals.appUrl = process.env.APP_URL || `http://localhost:${PORT}`;
   res.locals.currentPath = req.path;
   res.locals.adsenseId = process.env.GOOGLE_ADSENSE_ID || '';
@@ -117,10 +119,10 @@ async function start() {
   try {
     await initDB();
     app.listen(PORT, () => {
-      console.log(`[GhostDrop] Port ${PORT} | ${process.env.NODE_ENV || 'development'}`);
+      console.log(`[NoteFlame] Port ${PORT} | ${process.env.NODE_ENV || 'development'}`);
     });
   } catch (err) {
-    console.error('[GhostDrop] Failed to start:', err);
+    console.error('[NoteFlame] Failed to start:', err);
     process.exit(1);
   }
 }

@@ -5,20 +5,28 @@
   <div id="content-card" style="display:none">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-top:1.25rem;margin-bottom:.5rem">
       <span style="font-size:.75rem;color:var(--muted);font-family:var(--mono);text-transform:uppercase;letter-spacing:.1em">Decrypted content</span>
-      <button onclick="copyContent()" id="copy-content-btn" class="btn-ghost" style="font-family:var(--mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;color:var(--lime)">Copy</button>
+      <div style="display:flex;gap:.75rem;align-items:center">
+        <button onclick="copyContent()" id="copy-content-btn" class="btn-ghost" style="font-family:var(--mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;color:var(--lime)">Copy</button>
+        <button onclick="triggerBurn(document.getElementById('secret-content'))" class="btn-burn">Burn now</button>
+      </div>
     </div>
-    <pre class="reveal-content" id="secret-content"><%= content %></pre>
+    <div id="content-wrapper">
+      <pre class="reveal-content" id="secret-content"><%= content %></pre>
+      <% if (willDestroy) { %>
+        <div id="burn-timer-mount"></div>
+      <% } %>
+    </div>
   </div>
 
   <% if (willDestroy) { %>
-    <div class="reveal-destroyed" id="notice" style="display:none">This drop is now destroyed. Refreshing won't bring it back.</div>
+    <div class="reveal-destroyed" id="notice" style="display:none">🔥 This note has been burned &mdash; refreshing won't bring it back</div>
   <% } else { %>
-    <div class="reveal-remaining" id="notice" style="display:none"><strong><%= viewsRemaining %></strong> view<%= viewsRemaining !== 1 ? 's' : '' %> left.</div>
+    <div class="reveal-remaining" id="notice" style="display:none"><strong><%= viewsRemaining %></strong> view<%= viewsRemaining !== 1 ? 's' : '' %> left before it burns</div>
   <% } %>
 
   <div class="viral-cta" id="cta" style="display:none">
-    <p>Sent with <span class="brand">ghostdrop</span></p>
-    <p style="font-size:.75rem;margin-top:.25rem">Encrypted messages that self-destruct. Free.</p>
+    <p>Sent with <span class="brand">noteflame</span></p>
+    <p style="font-size:.75rem;margin-top:.25rem">Encrypted, self-destructing messages</p>
     <a href="/" class="btn btn-lime btn-sm" style="margin-top:.75rem">Send your own</a>
   </div>
 </div>
@@ -26,10 +34,24 @@
 <% if (adsenseId) { %><div class="ad-slot"><ins class="adsbygoogle" style="display:block" data-ad-client="<%= adsenseId %>" data-ad-slot="auto" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div><% } %>
 
 <script>
-setTimeout(() => {
+setTimeout(function() {
   document.getElementById('status-text').innerHTML = '// decrypted';
   document.getElementById('content-card').style.display = 'block';
   document.getElementById('notice').style.display = 'block';
   document.getElementById('cta').style.display = 'block';
+
+  // Apply fire-reveal glow to the content area
+  var contentWrapper = document.getElementById('content-wrapper');
+  if (contentWrapper) {
+    contentWrapper.classList.add('fire-reveal');
+  }
+
+  <% if (willDestroy) { %>
+  // Start the burn timer - content burns away after 10 seconds
+  var timerMount = document.getElementById('burn-timer-mount');
+  if (timerMount && typeof startBurnTimer === 'function') {
+    startBurnTimer(timerMount, 10000);
+  }
+  <% } %>
 }, 700);
 </script>

@@ -19,7 +19,7 @@ Hi [FIRST_NAME],
 
 Quick question - does your team ever share passwords or API keys over Slack or email?
 
-I built GhostDrop specifically for this. It creates encrypted, self-destructing links for sharing sensitive info. The secret is destroyed after being read.
+I built NoteFlame specifically for this. It creates encrypted, self-destructing links for sharing sensitive info. The secret is destroyed after being read.
 
 The 30-second version:
 - Paste a password → get an encrypted link → share it → it self-destructs
@@ -48,7 +48,7 @@ When a new employee starts at [COMPANY], how do you send them their initial pass
 
 Most companies use email, which means those credentials live in inboxes forever. That's a security risk and often a compliance issue (especially for SOC 2 / ISO 27001).
 
-I built GhostDrop for exactly this: encrypted, self-destructing credential delivery.
+I built NoteFlame for exactly this: encrypted, self-destructing credential delivery.
 
 Your IT team creates a "drop" with the new hire's credentials → gets a one-time link → sends it → the new hire reads it → it's permanently destroyed. You even get a notification when they've accessed it.
 
@@ -70,7 +70,7 @@ Hi [FIRST_NAME],
 
 Sharing passwords and access credentials in healthcare usually means email or paper. Neither is great for HIPAA compliance.
 
-GhostDrop provides encrypted, self-destructing links for sharing sensitive information. The content is AES-256-GCM encrypted and permanently destroyed after being viewed. No data retention, no searchable history, clean audit trail.
+NoteFlame provides encrypted, self-destructing links for sharing sensitive information. The content is AES-256-GCM encrypted and permanently destroyed after being viewed. No data retention, no searchable history, clean audit trail.
 
 Used by IT and DevOps teams to:
 - Deliver EHR credentials to new staff

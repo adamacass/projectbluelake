@@ -8,7 +8,7 @@
 ---
 
 ## Title (80 chars max)
-Show HN: GhostDrop - Self-destructing encrypted messages (open source)
+Show HN: NoteFlame - Self-destructing encrypted messages (open source)
 
 ## URL
 [Your deployed URL]
@@ -20,7 +20,7 @@ Leave blank if you submit a URL. The HN community will click through and form th
 
 Hi HN, maker here.
 
-I built GhostDrop because my team kept pasting database credentials into Slack. We needed something that:
+I built NoteFlame because my team kept pasting database credentials into Slack. We needed something that:
 
 1. Encrypts secrets at rest (AES-256-GCM)
 2. Destroys them after being read

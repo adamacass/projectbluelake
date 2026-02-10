@@ -3,14 +3,14 @@
   <h1 style="font-size:2.5rem">Share API Keys Without the Risk</h1>
   <p style="color:var(--dim);max-width:600px;margin-top:1rem;line-height:1.7;font-size:1.05rem">
     API keys in Slack threads, email chains, and Jira tickets are a breach waiting to happen.
-    GhostDrop gives your team a secure way to share credentials that vanishes after use.
+    NoteFlame gives your team a secure way to share credentials that vanishes after use.
   </p>
   <a href="/new" class="btn btn-lime" style="margin-top:1.5rem">Share an API Key Securely</a>
 </div>
 
 <div class="section-dark">
   <div class="section">
-    <h2 style="text-align:center">Why Developers Love GhostDrop</h2>
+    <h2 style="text-align:center">Why Developers Love NoteFlame</h2>
     <div style="margin-top:2rem">
       <div class="feat">
         <div class="feat-num">01</div>
@@ -47,12 +47,12 @@
 <div class="section">
   <h2>Quick Example: Share via CLI</h2>
   <pre style="background:var(--bg2);border:1px solid var(--border);padding:1.25rem;margin-top:1.25rem;overflow-x:auto"><code style="font-family:var(--mono);font-size:.8rem;color:var(--green);line-height:1.7"># Create a self-destructing drop with your API key
-curl -X POST https://your-ghostdrop.com/api/drops \
+curl -X POST https://your-noteflame.com/api/drops \
   -H "Authorization: Bearer YOUR_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{"content": "sk_live_abc123xyz", "expiry_hours": 1, "max_views": 1}'
 
-# Response: {"url": "https://your-ghostdrop.com/d/aBcDeFgH..."}</code></pre>
+# Response: {"url": "https://your-noteflame.com/d/aBcDeFgH..."}</code></pre>
   <p style="color:var(--dim);margin-top:1rem">Send the URL to your teammate. One view, then it's gone forever.</p>
 </div>
 

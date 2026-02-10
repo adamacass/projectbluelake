@@ -4,7 +4,7 @@
       <h1 style="font-size:1.5rem;font-weight:800">Dashboard</h1>
       <p style="color:var(--dim);font-size:.85rem"><%= user.email %></p>
     </div>
-    <a href="/new" class="btn btn-lime btn-sm">New drop</a>
+    <a href="/new" class="btn btn-lime btn-sm">New note</a>
   </div>
 
   <div class="dash-stats">
@@ -23,9 +23,9 @@
   <% } %>
 
   <div class="dash-section">
-    <h2>Your drops</h2>
+    <h2>Your notes</h2>
     <% if (drops.length === 0) { %>
-      <p style="color:var(--muted);font-size:.85rem;padding:2rem 0">No drops yet. <a href="/new">Create one.</a></p>
+      <p style="color:var(--muted);font-size:.85rem;padding:2rem 0">No notes yet. <a href="/new">Create one.</a></p>
     <% } else { %>
       <div style="overflow-x:auto">
         <table class="tbl">
@@ -38,7 +38,7 @@
               <td style="font-family:var(--mono);font-size:.78rem"><%= d.current_views %>/<%= d.max_views %></td>
               <td style="font-size:.78rem"><% if (d.expires_at) { %><%= new Date(d.expires_at).toLocaleDateString('en-US',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}) %><% } else { %>-<% } %></td>
               <td style="font-size:.78rem"><%= new Date(d.created_at).toLocaleDateString('en-US',{month:'short',day:'numeric'}) %></td>
-              <td><% if (!d.is_destroyed) { %><form method="POST" action="/dashboard/drops/<%= d.id %>/destroy" onsubmit="return confirm('Destroy this drop?')"><button type="submit" class="btn-ghost" style="color:var(--red);font-size:.7rem;font-family:var(--mono)">KILL</button></form><% } %></td>
+              <td><% if (!d.is_destroyed) { %><form method="POST" action="/dashboard/drops/<%= d.id %>/destroy" onsubmit="return confirm('Burn this note?')"><button type="submit" class="btn-ghost" style="color:var(--red);font-size:.7rem;font-family:var(--mono)">BURN</button></form><% } %></td>
             </tr>
           <% }) %>
           </tbody>

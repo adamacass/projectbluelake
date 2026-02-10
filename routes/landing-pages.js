@@ -6,7 +6,7 @@ const router = express.Router();
 router.get('/use-cases/share-passwords-securely', (req, res) => {
   res.render('landing/share-passwords', {
     title: 'Share Passwords Securely',
-    metaDescription: 'Stop sharing passwords over Slack and email. GhostDrop lets you share passwords with a self-destructing encrypted link that vanishes after being read.',
+    metaDescription: 'Stop sharing passwords over Slack and email. NoteFlame lets you share passwords with a self-destructing encrypted link that vanishes after being read.',
     metaKeywords: 'share password securely, send password safely, secure password sharing, encrypted password link, one-time password share',
   });
 });
@@ -39,17 +39,17 @@ router.get('/use-cases/hipaa-compliant-messaging', (req, res) => {
 
 router.get('/compare/privnote', (req, res) => {
   res.render('landing/compare-privnote', {
-    title: 'GhostDrop vs PrivNote',
-    metaDescription: 'Compare GhostDrop and PrivNote for self-destructing messages. See why teams choose GhostDrop for stronger encryption, API access, and password protection.',
-    metaKeywords: 'privnote alternative, privnote vs ghostdrop, better than privnote, self-destructing message app, privnote comparison',
+    title: 'NoteFlame vs PrivNote',
+    metaDescription: 'Compare NoteFlame and PrivNote for self-destructing messages. See why teams choose NoteFlame for stronger encryption, API access, and password protection.',
+    metaKeywords: 'privnote alternative, privnote vs noteflame, better than privnote, self-destructing message app, privnote comparison',
   });
 });
 
 router.get('/compare/onetimesecret', (req, res) => {
   res.render('landing/compare-onetimesecret', {
-    title: 'GhostDrop vs One-Time Secret',
-    metaDescription: 'Compare GhostDrop and One-Time Secret (onetimesecret.com). GhostDrop offers stronger encryption, modern UI, API access, and team features.',
-    metaKeywords: 'one-time secret alternative, onetimesecret vs ghostdrop, onetimesecret alternative, self-destructing secret sharing',
+    title: 'NoteFlame vs One-Time Secret',
+    metaDescription: 'Compare NoteFlame and One-Time Secret (onetimesecret.com). NoteFlame offers stronger encryption, modern UI, API access, and team features.',
+    metaKeywords: 'one-time secret alternative, onetimesecret vs noteflame, onetimesecret alternative, self-destructing secret sharing',
   });
 });
 
