@@ -1,4 +1,60 @@
-/* Fonts loaded via <link> in layout.ejs for CSP compatibility */
+/* ─── SELF-HOSTED FONTS ─── */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/inter-latin-400-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/inter-latin-500-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/fonts/inter-latin-600-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/inter-latin-700-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url('/fonts/inter-latin-800-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/jetbrains-mono-latin-400-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/jetbrains-mono-latin-500-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/jetbrains-mono-latin-700-normal.woff2') format('woff2');
+}
 
 :root {
   --bg: #000;
@@ -13,6 +69,10 @@
   --orange: #ff8c00;
   --mono: 'JetBrains Mono', monospace;
   --sans: 'Inter', sans-serif;
+  --fire-red: #ff4500;
+  --fire-orange: #ff8c00;
+  --fire-gold: #ffd700;
+  --fire-flame: #ff6b35;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -776,12 +836,6 @@ img { max-width: 100%; }
 }
 
 /* ─── FIRE / FLAME EFFECTS ─── */
-:root {
-  --fire-red: #ff4500;
-  --fire-orange: #ff8c00;
-  --fire-gold: #ffd700;
-  --fire-flame: #ff6b35;
-}
 
 /* --- fire-burst: brief celebration fire on note creation (plays once, ~1.5s) --- */
 @keyframes fireBurst {
