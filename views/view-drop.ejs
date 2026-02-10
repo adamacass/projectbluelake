@@ -1,0 +1,54 @@
+<section class="py-12">
+  <div class="max-w-2xl mx-auto px-4">
+    <div class="text-center">
+      <div class="gd-reveal-icon" id="reveal-icon">&#128274;</div>
+      <h1 class="text-2xl font-bold text-white mt-4" id="reveal-title">Decrypting...</h1>
+    </div>
+
+    <div class="gd-card mt-8 hidden" id="content-card">
+      <div class="flex justify-between items-center mb-4">
+        <span class="text-sm text-gray-400">Decrypted content:</span>
+        <button onclick="copyContent()" id="copy-content-btn" class="text-sm text-purple-400 hover:text-purple-300">
+          Copy to clipboard
+        </button>
+      </div>
+      <pre class="gd-content-display" id="secret-content"><%= content %></pre>
+    </div>
+
+    <% if (willDestroy) { %>
+      <div class="gd-warning-red mt-6 text-center" id="destroy-notice" style="display:none;">
+        This drop has been <strong>permanently destroyed</strong>. The content above is shown for the last time.
+        Refreshing this page will not show it again.
+      </div>
+    <% } else { %>
+      <div class="gd-warning mt-6 text-center" id="views-notice" style="display:none;">
+        <strong><%= viewsRemaining %></strong> view<%= viewsRemaining !== 1 ? 's' : '' %> remaining before this drop is destroyed.
+      </div>
+    <% } %>
+
+    <div class="text-center mt-8" id="actions" style="display:none;">
+      <a href="/new" class="gd-btn-secondary px-6 py-3">Create Your Own Drop</a>
+    </div>
+  </div>
+</section>
+
+<script>
+// Reveal animation
+setTimeout(() => {
+  document.getElementById('reveal-icon').innerHTML = '&#128275;';
+  document.getElementById('reveal-title').textContent = 'Secret Revealed';
+  document.getElementById('content-card').classList.remove('hidden');
+  const notice = document.getElementById('destroy-notice') || document.getElementById('views-notice');
+  if (notice) notice.style.display = 'block';
+  document.getElementById('actions').style.display = 'block';
+}, 800);
+
+function copyContent() {
+  const content = document.getElementById('secret-content').textContent;
+  navigator.clipboard.writeText(content).then(() => {
+    const btn = document.getElementById('copy-content-btn');
+    btn.textContent = 'Copied!';
+    setTimeout(() => { btn.textContent = 'Copy to clipboard'; }, 2000);
+  });
+}
+</script>

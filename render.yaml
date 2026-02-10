@@ -1,0 +1,34 @@
+databases:
+  - name: ghostdrop-db
+    plan: starter
+    databaseName: ghostdrop
+    user: ghostdrop
+
+services:
+  - type: web
+    name: ghostdrop
+    runtime: node
+    plan: starter
+    buildCommand: npm install && node scripts/init-db.js
+    startCommand: node server.js
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: ghostdrop-db
+          property: connectionString
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: ENCRYPTION_SECRET
+        generateValue: true
+      - key: NODE_ENV
+        value: production
+      - key: STRIPE_SECRET_KEY
+        sync: false
+      - key: STRIPE_PUBLISHABLE_KEY
+        sync: false
+      - key: STRIPE_WEBHOOK_SECRET
+        sync: false
+      - key: STRIPE_PRO_PRICE_ID
+        sync: false
+      - key: STRIPE_BUSINESS_PRICE_ID
+        sync: false

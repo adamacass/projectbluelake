@@ -1,0 +1,89 @@
+<section class="py-12">
+  <div class="max-w-3xl mx-auto px-4">
+    <h1 class="text-3xl font-bold text-white">API Documentation</h1>
+    <p class="text-gray-400 mt-2">Integrate GhostDrop into your apps and workflows. <span class="gd-pro-badge">PRO</span></p>
+
+    <!-- Auth -->
+    <div class="mt-10">
+      <h2 class="text-2xl font-semibold text-white">Authentication</h2>
+      <p class="text-gray-400 mt-2">All API requests require a Bearer token. The token is your email and password, base64-encoded:</p>
+      <pre class="gd-code mt-4"><code># Generate your token
+echo -n "your@email.com:yourpassword" | base64
+
+# Use in requests
+curl -H "Authorization: Bearer YOUR_TOKEN" ...</code></pre>
+    </div>
+
+    <!-- Create Drop -->
+    <div class="mt-10">
+      <h2 class="text-2xl font-semibold text-white">Create a Drop</h2>
+      <div class="gd-endpoint mt-4">
+        <span class="gd-method-post">POST</span>
+        <code>/api/drops</code>
+      </div>
+      <h3 class="text-lg font-medium text-gray-300 mt-4">Request Body (JSON)</h3>
+      <pre class="gd-code mt-2"><code>{
+  "content": "my-secret-api-key-12345",
+  "password": "optional-password",
+  "expiry_hours": 24,
+  "max_views": 1,
+  "label": "API key for staging"
+}</code></pre>
+      <h3 class="text-lg font-medium text-gray-300 mt-4">Response</h3>
+      <pre class="gd-code mt-2"><code>{
+  "url": "https://ghostdrop.app/d/aBcDeFgHiJkLmNoPqRsTuV",
+  "slug": "aBcDeFgHiJkLmNoPqRsTuV",
+  "expires_at": "2025-01-16T12:00:00.000Z",
+  "max_views": 1,
+  "has_password": false
+}</code></pre>
+    </div>
+
+    <!-- Retrieve Drop -->
+    <div class="mt-10">
+      <h2 class="text-2xl font-semibold text-white">Retrieve a Drop</h2>
+      <div class="gd-endpoint mt-4">
+        <span class="gd-method-get">GET</span>
+        <code>/api/drops/:slug</code>
+      </div>
+      <p class="text-gray-400 mt-2">No authentication required. For password-protected drops, pass <code class="text-purple-400">?password=yourpassword</code>.</p>
+      <pre class="gd-code mt-4"><code>curl https://ghostdrop.app/api/drops/aBcDeFgHiJkLmNoPqRsTuV</code></pre>
+      <h3 class="text-lg font-medium text-gray-300 mt-4">Response</h3>
+      <pre class="gd-code mt-2"><code>{
+  "content": "my-secret-api-key-12345",
+  "destroyed": true,
+  "views_remaining": 0
+}</code></pre>
+    </div>
+
+    <!-- List Drops -->
+    <div class="mt-10">
+      <h2 class="text-2xl font-semibold text-white">List Your Drops</h2>
+      <div class="gd-endpoint mt-4">
+        <span class="gd-method-get">GET</span>
+        <code>/api/drops</code>
+      </div>
+      <p class="text-gray-400 mt-2">Requires authentication. Returns your most recent 100 drops.</p>
+    </div>
+
+    <!-- Delete Drop -->
+    <div class="mt-10">
+      <h2 class="text-2xl font-semibold text-white">Delete a Drop</h2>
+      <div class="gd-endpoint mt-4">
+        <span class="gd-method-delete">DELETE</span>
+        <code>/api/drops/:id</code>
+      </div>
+      <p class="text-gray-400 mt-2">Requires authentication. Permanently destroys the specified drop.</p>
+    </div>
+
+    <!-- Rate Limits -->
+    <div class="mt-10">
+      <h2 class="text-2xl font-semibold text-white">Rate Limits</h2>
+      <p class="text-gray-400 mt-2">API requests are limited to 60 requests per minute. Response headers include rate limit info.</p>
+    </div>
+
+    <div class="mt-10 text-center">
+      <a href="/register" class="gd-btn-primary px-8 py-3">Get API Access &rarr;</a>
+    </div>
+  </div>
+</section>
